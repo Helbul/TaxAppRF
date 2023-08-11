@@ -19,6 +19,6 @@ class MainAccountsAdapterViewHolder(
     fun bind(accountModel: AccountModel) {
         account = accountModel
 
-        binding.drawerHeaderItemName.text = account.name
+        binding.drawerHeaderItemTitle.text = account.name
     }
 }

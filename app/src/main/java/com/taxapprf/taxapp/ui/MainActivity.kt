@@ -49,7 +49,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Loading {
             }
 
             override fun onClickAdd() {
-                navToAccountAdd()
+                if (navController.currentDestination?.id != R.id.account_add) {
+                    binding.drawerLayout.close()
+                    navToAccountAdd()
+                }
             }
         }
     }
@@ -154,7 +157,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Loading {
     }
 
     private fun navToAccountAdd() {
-
+        navController.navigate(R.id.action_global_accountAddFragment)
     }
 
     companion object {

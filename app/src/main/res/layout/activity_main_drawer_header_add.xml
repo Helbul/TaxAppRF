@@ -5,24 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?attr/selectableItemBackground"
-    android:orientation="horizontal"
-    android:padding="@dimen/offset_8">
+    android:paddingVertical="@dimen/offset_16"
+    android:paddingHorizontal="@dimen/drawer_header_add_horizontal_offset">
 
     <ImageView
         android:id="@+id/drawer_header_item_icon"
-        android:layout_width="@dimen/image_size"
-        android:layout_height="@dimen/image_size"
+        android:layout_width="@dimen/drawer_header_add_icon_size"
+        android:layout_height="@dimen/drawer_header_add_icon_size"
         android:layout_marginStart="@dimen/offset_8"
-        android:padding="@dimen/offset_8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_circle_24" />
 
     <TextView
-        android:id="@+id/drawer_header_item_name"
+        android:id="@+id/drawer_header_item_title"
         android:layout_width="@dimen/zero"
         android:layout_height="match_parent"
-        android:padding="@dimen/offset_8"
+        android:paddingHorizontal="@dimen/drawer_header_add_title_horizontal_offset"
         android:text="@string/drawer_header_add_name"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
         app:layout_constraintBottom_toBottomOf="@+id/drawer_header_item_icon"

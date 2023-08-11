@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class AccountAddFragment : BaseFragment(R.layout.fragment_account_add) {
     private val binding by viewBinding(FragmentAccountAddBinding::bind)
     private val viewModel by viewModels<AccountAddViewModel>()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

@@ -75,4 +75,12 @@
         android:label="@string/menuChangeAccount"
         tools:layout="@layout/fragment_account_change" />
 
+    <fragment
+        android:id="@+id/account_add"
+        android:name="com.taxapprf.taxapp.ui.account.add.AccountAddFragment"
+        tools:layout="@layout/fragment_account_add" />
+    <action
+        android:id="@+id/action_global_accountAddFragment"
+        app:destination="@id/account_add" />
+
 </navigation>

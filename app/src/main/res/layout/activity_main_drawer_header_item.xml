@@ -4,27 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_header_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:foreground="?attr/selectableItemBackground"
-    android:orientation="horizontal"
-    android:padding="@dimen/offset_8">
-
-    <ImageView
-        android:id="@+id/drawer_header_item_icon"
-        android:layout_width="@dimen/image_size"
-        android:layout_height="@dimen/image_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="@dimen/item_size"
+    android:foreground="?attr/selectableItemBackground">
 
     <TextView
-        android:id="@+id/drawer_header_item_name"
-        tools:text="Account"
-        android:layout_width="0dp"
+        android:id="@+id/drawer_header_item_title"
+        android:layout_width="@dimen/zero"
+        android:gravity="center_vertical"
         android:layout_height="match_parent"
-        android:padding="@dimen/offset_8"
+        android:layout_marginStart="54dp"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-        app:layout_constraintBottom_toBottomOf="@+id/drawer_header_item_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/drawer_header_item_icon"
-        app:layout_constraintTop_toTopOf="@+id/drawer_header_item_icon" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Account" />
 </androidx.constraintlayout.widget.ConstraintLayout>

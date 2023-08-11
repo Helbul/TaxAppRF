@@ -24,7 +24,11 @@
     <dimen name="user_avatar_size">56dp</dimen>
     <dimen name="button_icon_size">32dp</dimen>
     <dimen name="image_size">46dp</dimen>
-    <dimen name="item_size">46dp</dimen>
-    <dimen name="drawer_header_active_account_offset_start">56dp</dimen>
+    <dimen name="item_size">54dp</dimen>
+    <dimen name="drawer_header_add_icon_size">24dp</dimen>
+    <dimen name="drawer_header_active_account_offset_start">64dp</dimen>
+    <dimen name="offset_24">24dp</dimen>
+    <dimen name="drawer_header_add_title_horizontal_offset">10dp</dimen>
+    <dimen name="drawer_header_add_horizontal_offset">20dp</dimen>
 
 </resources>

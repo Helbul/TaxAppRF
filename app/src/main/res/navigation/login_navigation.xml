@@ -19,52 +19,16 @@
             app:destination="@id/sign_up"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
-        <action
-            android:id="@+id/action_sign_to_account_select"
-            app:destination="@id/account_select" />
     </fragment>
 
     <fragment
         android:id="@+id/sign_in"
         android:name="com.taxapprf.taxapp.ui.sign.in.SignInFragment"
-        tools:layout="@layout/fragment_sign_in">
-        <action
-            android:id="@+id/action_sign_in_to_select_account"
-            app:destination="@id/account_select"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-    </fragment>
+        tools:layout="@layout/fragment_sign_in"/>
 
     <fragment
         android:id="@+id/sign_up"
         android:name="com.taxapprf.taxapp.ui.sign.up.SignUpFragment"
-        tools:layout="@layout/fragment_sign_up">
-        <action
-            android:id="@+id/action_sign_up_to_account_first"
-            app:destination="@id/account_first"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/account_select"
-        android:name="com.taxapprf.taxapp.ui.account.select.AccountSelectFragment"
-        tools:layout="@layout/fragment_account_select">
-        <action
-            android:id="@+id/action_account_select_to_account_new"
-            app:destination="@id/account_new"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/account_new"
-        android:name="com.taxapprf.taxapp.ui.account.add.AccountAddFragment"
-        tools:layout="@layout/fragment_account_add" />
-
-    <fragment
-        android:id="@+id/account_first"
-        android:name="com.taxapprf.taxapp.ui.account.first.AccountFirstFragment"
-        tools:layout="@layout/fragment_account_first" />
+        tools:layout="@layout/fragment_sign_up"/>
 
 </navigation>

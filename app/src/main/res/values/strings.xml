@@ -138,5 +138,6 @@
     <string name="textChangeAccountUnderBottom">Выберете существующий или создайте новый счет</string>
     <string name="account_change_message_waite_loading">Идет загрузка доступных счетов. Пожалуйста, подождите.</string>
     <string name="drawer_header_add_name">Добавить аккаунт</string>
+    <string name="add_name">Добавить</string>
 
 </resources>
