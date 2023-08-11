@@ -18,5 +18,10 @@
     <dimen name="sign_margin_side">60dp</dimen>
     <dimen name="sign_up_margin_bottom">80dp</dimen>
     <dimen name="sign_up_edit_margin_bottom">15dp</dimen>
+    <dimen name="offset_8">8dp</dimen>
+    <dimen name="offset_16">16dp</dimen>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="user_avatar_size">64dp</dimen>
+    <dimen name="button_icon_size">32dp</dimen>
 
 </resources>

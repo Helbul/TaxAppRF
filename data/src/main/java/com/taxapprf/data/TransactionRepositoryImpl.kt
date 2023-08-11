@@ -12,23 +12,14 @@ import com.taxapprf.domain.transaction.SaveTransactionModel
 import com.taxapprf.domain.transaction.TransactionType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import kotlin.math.abs
-import kotlin.math.floor
 
 class TransactionRepositoryImpl @Inject constructor(
     private val firebaseTransactionDao: FirebaseTransactionDaoImpl,
     private val firebaseReportDao: FirebaseReportDaoImpl,
     private val cbrapi: CBRAPI,
 ) : TransactionRepository {
-    /*    override fun getTransaction(firebasePathModel: FirebasePathModel) = flow {
-            emit(
-                firebaseTransactionDao.getTransaction(firebasePathModel)
-                    ?.toTransactionModel()
-            )
-        }*/
-
     override fun getTransactions(firebasePathModel: FirebasePathModel) =
         firebaseTransactionDao.getTransactions(firebasePathModel)
 
@@ -71,7 +62,6 @@ class TransactionRepositoryImpl @Inject constructor(
         }
 
     private fun SaveTransactionModel.updateCBRRate() {
-        println("@@@@ " + date)
         val rate = cbrapi.getCurrency(date).execute().body()
             ?.getCurrencyRate(currency)
             ?: throw CBRErrorRateIsEmpty()

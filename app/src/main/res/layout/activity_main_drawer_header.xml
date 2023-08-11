@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/side_nav_bar"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <ImageView
+        android:id="@+id/imageNavHeaderUserAvatar"
+        android:layout_width="@dimen/user_avatar_size"
+        android:layout_height="@dimen/user_avatar_size"
+        android:layout_marginStart="@dimen/offset_16"
+        android:layout_marginTop="@dimen/offset_16"
+        android:contentDescription="@string/nav_header_desc"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_payment_tax_invoice_document_calculator_icon_188684" />
+
+    <TextView
+        android:id="@+id/textNavHeaderUserName"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/offset_16"
+        android:layout_marginEnd="@dimen/offset_16"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageNavHeaderUserAvatar"
+        app:layout_constraintTop_toTopOf="@+id/imageNavHeaderUserAvatar"
+        tools:text="Name" />
+
+    <TextView
+        android:id="@+id/textNavHeaderUserEmail"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/offset_8"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        app:layout_constraintEnd_toEndOf="@+id/textNavHeaderUserName"
+        app:layout_constraintStart_toStartOf="@+id/textNavHeaderUserName"
+        app:layout_constraintTop_toBottomOf="@+id/textNavHeaderUserName"
+        tools:text="email" />
+
+    <androidx.constraintlayout.helper.widget.Layer
+        android:id="@+id/layer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingHorizontal="@dimen/offset_16"
+        app:constraint_referenced_ids="textNavHeaderUserAccount,buttonNavHeaderUserAccount"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textNavHeaderUserAccount"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/offset_8"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonNavHeaderUserAccount"
+        app:layout_constraintEnd_toStartOf="@+id/buttonNavHeaderUserAccount"
+        app:layout_constraintStart_toEndOf="@+id/imageNavHeaderUserAvatar"
+        app:layout_constraintStart_toStartOf="@+id/imageNavHeaderUserAvatar"
+        app:layout_constraintTop_toTopOf="@+id/buttonNavHeaderUserAccount"
+        tools:text="account" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonNavHeaderUserAccount"
+        style="@style/Widget.Material3.Button.IconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/offset_8"
+        app:icon="@drawable/ic_baseline_expand_more_24"
+        app:iconSize="@dimen/button_icon_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageNavHeaderUserAvatar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
