@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Loading {
     private val mAppBarConfiguration by lazy {
         AppBarConfiguration(
             setOf(
+                R.id.sign,
                 R.id.currency_rates_today,
                 R.id.reports,
                 R.id.account_change,
@@ -65,6 +66,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Loading {
         super.onCreate(savedInstanceState)
 
         navController.setGraph(R.navigation.mobile_navigation)
+        if (!viewModel.isSignIn) navToSign()
+
+        println(navController.currentBackStackEntry)
+
         setSupportActionBar(binding.appBarMain.toolbar)
         setupActionBarWithNavController(
             this@MainActivity,
@@ -97,7 +102,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Loading {
         }
 
         viewModel.accounts.observe(this@MainActivity) {
-            accountsAdapter.submitList(it)
+            if (it.isNotEmpty()) accountsAdapter.submitList(it)
         }
     }
 
@@ -156,8 +161,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Loading {
         onLoadingStop()
     }
 
+
+    private fun navToSign() {
+        navController.navigate(R.id.action_global_sign)
+    }
+
     private fun navToAccountAdd() {
-        navController.navigate(R.id.action_global_accountAddFragment)
+        navController.navigate(R.id.action_global_account_add)
     }
 
     companion object {

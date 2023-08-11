@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     private val binding by viewBinding(FragmentSignInBinding::bind)
     private val viewModel by viewModels<SignInViewModel>()
-    //TODO при первой авторизации когда нет аккаунтов направлять на ферст аккаунт.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -30,7 +29,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     private fun SignInViewModel.observeState() =
         state.observe(viewLifecycleOwner) {
             when (it) {
-                is BaseState.Success -> navToAccountSelect()
+                is BaseState.Success -> navToReports()
                 else -> {}
             }
         }
@@ -45,7 +44,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
         viewModel.signIn(inputEmail, inputPassword)
     }
 
-    private fun navToAccountSelect() {
-        findNavController().navigate(R.id.action_sign_in_to_select_account)
+    private fun navToReports() {
+        findNavController().navigate(R.id.action_global_reports)
     }
 }

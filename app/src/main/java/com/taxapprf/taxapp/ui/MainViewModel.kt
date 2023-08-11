@@ -5,15 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.taxapprf.domain.report.ReportModel
-import com.taxapprf.domain.transaction.TransactionModel
 import com.taxapprf.domain.account.AccountModel
 import com.taxapprf.domain.account.GetAccountsUseCase
+import com.taxapprf.domain.report.ReportModel
+import com.taxapprf.domain.transaction.TransactionModel
 import com.taxapprf.domain.user.IsSignInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,11 +30,16 @@ class MainViewModel @Inject constructor(
 
     val accounts = getAccountsUseCase.execute()
         .flowOn(Dispatchers.IO)
-        .onEach { accounts ->
-            println(accounts)
-            accounts.find { it.active }?.let {
-                println(it)
-                _account.postValue(it) }
+        .map { accounts ->
+            if (accounts.isFailure) {
+                listOf()
+            } else {
+                val result = accounts.getOrNull()
+                result?.find { it.active }?.let {
+                    _account.postValue(it)
+                }
+                result ?: listOf()
+            }
         }
         .asLiveData(viewModelScope.coroutineContext)
 

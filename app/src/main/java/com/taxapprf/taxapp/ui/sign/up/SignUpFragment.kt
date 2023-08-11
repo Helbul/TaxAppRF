@@ -32,7 +32,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
             when (it) {
                 is BaseState.Success -> {
                     binding.root.showSnackBar(R.string.message__sign_up_success)
-                    navToAccountFirst()
+                    navToReports()
                 }
 
                 else -> {}
@@ -51,7 +51,7 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
         viewModel.signUp(inputName, inputEmail, inputPassword, inputPhone)
     }
 
-    private fun navToAccountFirst() {
-        findNavController().navigate(R.id.action_sign_up_to_account_first)
+    private fun navToReports() {
+        findNavController().navigate(R.id.action_global_reports)
     }
 }

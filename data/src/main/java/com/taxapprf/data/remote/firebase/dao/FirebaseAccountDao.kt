@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface FirebaseAccountDao {
-    fun getAccounts(): Flow<List<AccountModel>>
+    fun getAccounts(): Flow<Result<List<AccountModel>>>
     suspend fun saveAccount(firebaseAccountModel: FirebaseAccountModel)
     suspend fun saveAccounts(firebaseAccountModels: Map<String, FirebaseAccountModel>)
     suspend fun saveDefaultAccount()

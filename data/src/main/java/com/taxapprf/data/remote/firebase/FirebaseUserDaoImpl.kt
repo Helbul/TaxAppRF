@@ -42,7 +42,7 @@ class FirebaseUserDaoImpl @Inject constructor(
         }
     }
 
-    override fun isSignIn() = fb.auth.currentUser?.uid != null
+    override fun isSignIn() = fb.auth.currentUser != null
 
     override suspend fun getProfile() =
         safeCall {

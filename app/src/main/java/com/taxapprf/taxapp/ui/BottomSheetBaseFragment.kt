@@ -3,7 +3,7 @@ package com.taxapprf.taxapp.ui
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.taxapprf.data.error.AuthError
+import com.taxapprf.data.error.DataErrorAuth
 import com.taxapprf.data.error.InputErrorEmailEmpty
 import com.taxapprf.data.error.InputErrorEmailIncorrect
 import com.taxapprf.data.error.InputErrorNameEmpty
@@ -44,7 +44,7 @@ open class BottomSheetBaseFragment(layoutId: Int) : BottomSheetDialogFragment(la
         loading.onLoadingStop()
 
         val stringResId = when (t) {
-            is AuthError -> R.string.auth_error
+            is DataErrorAuth -> R.string.auth_error
             is AuthErrorSessionExpired -> R.string.auth_error_session_expire
             is InputErrorNameEmpty -> R.string.error_name_empty
             is InputErrorPhoneEmpty -> R.string.error_phone_empty

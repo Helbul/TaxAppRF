@@ -4,7 +4,7 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.taxapprf.data.error.AuthError
+import com.taxapprf.data.error.DataErrorAuth
 import com.taxapprf.data.error.SignInErrorWrongPassword
 import com.taxapprf.data.error.SignUpErrorEmailAlreadyUse
 import kotlin.math.floor
@@ -21,7 +21,7 @@ fun Exception.toAppError() = when (this) {
     is FirebaseAuthUserCollisionException -> SignUpErrorEmailAlreadyUse()
     is FirebaseAuthInvalidCredentialsException -> SignInErrorWrongPassword()
     is FirebaseAuthInvalidUserException -> SignInErrorWrongPassword()
-    is FirebaseException -> AuthError()
+    is FirebaseException -> DataErrorAuth()
     else -> this
 }
 

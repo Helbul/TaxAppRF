@@ -6,6 +6,7 @@ import com.google.firebase.database.ValueEventListener
 import com.taxapprf.data.remote.firebase.dao.FirebaseAccountDao
 import com.taxapprf.data.remote.firebase.model.FirebaseAccountModel
 import com.taxapprf.data.safeCall
+import com.taxapprf.domain.account.AccountModel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.callbackFlow
@@ -16,7 +17,7 @@ import javax.inject.Inject
 class FirebaseAccountDaoImpl @Inject constructor(
     private val fb: FirebaseAPI,
 ) : FirebaseAccountDao {
-    override fun getAccounts() = callbackFlow {
+    override fun getAccounts() = callbackFlow<Result<List<AccountModel>>> {
         safeCall {
             val callback = object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -26,19 +27,20 @@ class FirebaseAccountDaoImpl @Inject constructor(
                                 ?.toAccountModel(it.key)
                         }
 
-                    trySendBlocking(accounts)
+                    trySendBlocking(Result.success(accounts))
                 }
 
                 override fun onCancelled(error: DatabaseError) {
+                    trySendBlocking(Result.failure(error.toException()))
                 }
             }
 
-            fb.getAccountsPath().addValueEventListener(callback)
+            if (fb.isUserAuth)
+                fb.getAccountsPath().addValueEventListener(callback)
 
             awaitClose {
-                fb.auth.currentUser?.uid?.let {
+                if (!fb.isUserAuth)
                     fb.getAccountsPath().removeEventListener(callback)
-                }
             }
         }
     }

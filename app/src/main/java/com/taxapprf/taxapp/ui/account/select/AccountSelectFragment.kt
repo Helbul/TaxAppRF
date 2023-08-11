@@ -11,7 +11,6 @@ import com.taxapprf.taxapp.R
 import com.taxapprf.taxapp.databinding.FragmentAccountSelectBinding
 import com.taxapprf.taxapp.ui.BaseFragment
 import com.taxapprf.taxapp.ui.BaseState
-import com.taxapprf.taxapp.ui.LoginActivity
 import com.taxapprf.taxapp.ui.MainActivity
 import com.taxapprf.taxapp.ui.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +30,7 @@ class AccountSelectFragment : BaseFragment(R.layout.fragment_account_select) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.prepSelectSpinner()
-        binding.buttonSelectNewAccountCreate.setOnClickListener { navToNewAccount() }
+//        binding.buttonSelectNewAccountCreate.setOnClickListener { navToNewAccount() }
         binding.buttonSelectExit.setOnClickListener { viewModel.logOut() }
 
         viewModel.attachToBaseFragment()
@@ -57,30 +56,30 @@ class AccountSelectFragment : BaseFragment(R.layout.fragment_account_select) {
 
     private fun AccountSelectViewModel.observeState() =
         state.observe(viewLifecycleOwner) {
-            when (it) {
+/*            when (it) {
                 is BaseState.LogOut -> navToLoginActivity()
                 is BaseState.AccountSelect -> navToMainActivity()
                 else -> {}
-            }
+            }*/
         }
 
     private fun AccountSelectViewModel.observeAccounts() =
         accounts.observe(viewLifecycleOwner) { accounts ->
-            adapter.clear()
-            adapter.addAll(accounts.map { it.name })
+/*            adapter.clear()
+            adapter.addAll(accounts.map { it.name })*/
         }
 
-    private fun navToLoginActivity() {
+/*    private fun navToLoginActivity() {
         startActivity(Intent(activity, LoginActivity::class.java))
         requireActivity().finish()
-    }
+    }*/
 
     private fun navToMainActivity() {
         startActivity(Intent(activity, MainActivity::class.java))
         requireActivity().finish()
     }
 
-    private fun navToNewAccount() {
+/*    private fun navToNewAccount() {
         findNavController().navigate(R.id.action_account_select_to_account_new)
-    }
+    }*/
 }

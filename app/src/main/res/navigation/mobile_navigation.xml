@@ -3,13 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/reports">
+    app:startDestination="@id/reports">
+
+    <action
+        android:id="@+id/action_global_account_add"
+        app:destination="@id/account_add"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <action
+        android:id="@+id/action_global_sign"
+        app:destination="@id/sign"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <action
+        android:id="@+id/action_global_reports"
+        app:destination="@id/reports"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 
     <fragment
-        android:id="@+id/currency_rates_today"
-        android:name="com.taxapprf.taxapp.ui.currency.today.CurrencyRatesTodayFragment"
-        android:label="@string/menuRatesToday"
-        tools:layout="@layout/fragment_rates_today" />
+        android:id="@+id/sign"
+        android:name="com.taxapprf.taxapp.ui.sign.SignFragment"
+        tools:layout="@layout/fragment_sign">
+        <action
+            android:id="@+id/action_sign_to_sign_in"
+            app:destination="@id/sign_in"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_sign_to_sign_up"
+            app:destination="@id/sign_up"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sign_in"
+        android:name="com.taxapprf.taxapp.ui.sign.in.SignInFragment"
+        tools:layout="@layout/fragment_sign_in" />
+
+    <fragment
+        android:id="@+id/sign_up"
+        android:name="com.taxapprf.taxapp.ui.sign.up.SignUpFragment"
+        tools:layout="@layout/fragment_sign_up" />
 
     <fragment
         android:id="@+id/reports"
@@ -64,23 +110,20 @@
         tools:layout="@layout/fragment_transaction_detail" />
 
     <fragment
+        android:id="@+id/currency_rates_today"
+        android:name="com.taxapprf.taxapp.ui.currency.today.CurrencyRatesTodayFragment"
+        android:label="@string/menuRatesToday"
+        tools:layout="@layout/fragment_rates_today" />
+
+    <fragment
         android:id="@+id/currency_converter"
         android:name="com.taxapprf.taxapp.ui.currency.converter.CurrencyConverterFragment"
         android:label="@string/menuConverter"
         tools:layout="@layout/fragment_currency_converter" />
 
     <fragment
-        android:id="@+id/account_change"
-        android:name="com.taxapprf.taxapp.ui.account.change.AccountChangeFragment"
-        android:label="@string/menuChangeAccount"
-        tools:layout="@layout/fragment_account_change" />
-
-    <fragment
         android:id="@+id/account_add"
         android:name="com.taxapprf.taxapp.ui.account.add.AccountAddFragment"
         tools:layout="@layout/fragment_account_add" />
-    <action
-        android:id="@+id/action_global_accountAddFragment"
-        app:destination="@id/account_add" />
 
 </navigation>
