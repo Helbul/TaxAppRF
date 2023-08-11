@@ -1,22 +1,25 @@
 package com.taxapprf.taxapp.ui
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.helper.widget.Layer
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.taxapprf.domain.account.AccountModel
 import com.taxapprf.taxapp.R
 import com.taxapprf.taxapp.databinding.ActivityMainBinding
+import com.taxapprf.taxapp.ui.activity.MainAccountsAdapter
+import com.taxapprf.taxapp.ui.activity.MainAccountsAdapterCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,6 +42,22 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Loading {
         findNavController(this, R.id.nav_host_fragment_content_main)
     }
 
+    private val accountsAdapter = MainAccountsAdapter {
+        object : MainAccountsAdapterCallback {
+            override fun onClick(accountModel: AccountModel) {
+                viewModel.changeAccount(accountModel)
+            }
+
+            override fun onClickAdd() {
+                navToAccountAdd()
+            }
+        }
+    }
+
+    private val header by lazy { binding.navView.getHeaderView(HEADER_POSITION) }
+    private val recycler by lazy { header.findViewById<RecyclerView>(R.id.recyclerNavHeaderAccounts) }
+    private var isAccountsExpand = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,6 +71,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Loading {
         setupWithNavController(binding.navView, navController)
         prepDrawer()
 
+        recycler.adapter = accountsAdapter
+        header.findViewById<Layer>(R.id.layerNavHeaderAccounts).setOnClickListener {
+            if (isAccountsExpand) expandLessAccounts()
+            else expandMoreAccounts()
+            isAccountsExpand = !isAccountsExpand
+        }
+
         viewModel.state.observe(this@MainActivity) {
             when (it) {
                 is ActivityBaseState.Loading -> loading()
@@ -62,25 +88,42 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Loading {
             }
         }
 
-        viewModel.accounts.observe(this@MainActivity) {
-
+        viewModel.account.observe(this@MainActivity) {
+            val account = header.findViewById<TextView>(R.id.textNavHeaderUserAccount)
+            account.text = it.name
         }
+
+        viewModel.accounts.observe(this@MainActivity) {
+            accountsAdapter.submitList(it)
+        }
+    }
+
+    private fun expandMoreAccounts() {
+        header.findViewById<ImageView>(R.id.imageNavHeaderUserAccountExpand)
+            .setImageResource(R.drawable.ic_baseline_expand_less_24)
+        recycler.isVisible = true
+    }
+
+    private fun expandLessAccounts() {
+        header.findViewById<ImageView>(R.id.imageNavHeaderUserAccountExpand)
+            .setImageResource(R.drawable.ic_baseline_expand_more_24)
+        recycler.isVisible = false
     }
 
     private fun loading() {
     }
 
     private fun prepDrawer() {
-        val header = binding.navView.getHeaderView(0)
-        header.setOnClickListener {
-            navController.navigate(R.id.account_change)
-            binding.navView.visibility = View.GONE
-        }
+        /*        val header = binding.navView.getHeaderView(0)
+                header.setOnClickListener {
+                    navController.navigate(R.id.account_change)
+                    binding.navView.visibility = View.GONE
+                }*/
 
-/*        val userAccount = header.findViewById<TextView>(R.id.textNavHeaderUserAccount)
-        val settings: SharedPreferences =
-            this.getSharedPreferences(Settings.SETTINGSFILE.name, Context.MODE_PRIVATE)
-        userAccount.text = settings.getString(Settings.ACCOUNT.name, "")*/
+        /*        val userAccount = header.findViewById<TextView>(R.id.textNavHeaderUserAccount)
+                val settings: SharedPreferences =
+                    this.getSharedPreferences(Settings.SETTINGSFILE.name, Context.MODE_PRIVATE)
+                userAccount.text = settings.getString(Settings.ACCOUNT.name, "")*/
     }
 
 
@@ -108,5 +151,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), Loading {
 
     override fun onLoadingSuccess() {
         onLoadingStop()
+    }
+
+    private fun navToAccountAdd() {
+
+    }
+
+    companion object {
+        private const val HEADER_POSITION = 0
     }
 }

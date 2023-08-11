@@ -43,4 +43,8 @@ class MainViewModel @Inject constructor(
 
     var report: ReportModel? = null
     var transaction: TransactionModel? = null
+
+    fun changeAccount(accountModel: AccountModel) {
+
+    }
 }

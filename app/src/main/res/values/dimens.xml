@@ -21,7 +21,10 @@
     <dimen name="offset_8">8dp</dimen>
     <dimen name="offset_16">16dp</dimen>
     <dimen name="zero">0dp</dimen>
-    <dimen name="user_avatar_size">64dp</dimen>
+    <dimen name="user_avatar_size">56dp</dimen>
     <dimen name="button_icon_size">32dp</dimen>
+    <dimen name="image_size">46dp</dimen>
+    <dimen name="item_size">46dp</dimen>
+    <dimen name="drawer_header_active_account_offset_start">56dp</dimen>
 
 </resources>

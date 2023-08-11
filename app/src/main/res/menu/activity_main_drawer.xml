@@ -24,10 +24,5 @@
             android:icon="@drawable/ic_baseline_wifi_protected_setup_24"
             android:title="@string/menuChangeAccount" />
 
-        <item
-            android:id="@+id/exit"
-            android:icon="@drawable/ic_baseline_exit_to_app_24"
-            android:title="@string/menuExit" />
-
     </group>
 </menu>
