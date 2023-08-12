@@ -12,7 +12,7 @@ class MainAccountsAdapterViewHolder(
 
     init {
         binding.drawerHeaderItem.setOnClickListener {
-            callback.onClick(account)
+            callback.onClick(account.name)
         }
     }
 

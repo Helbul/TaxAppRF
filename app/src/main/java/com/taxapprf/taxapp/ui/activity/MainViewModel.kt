@@ -45,7 +45,7 @@ class MainViewModel @Inject constructor(
             .onStart { _state.loading() }
             .catch { _state.error(it) }
             .collectLatest {
-                _accounts.postValue(it.toAccountsModel())
+                it.updateAccounts()
                 _state.success()
             }
     }
@@ -54,27 +54,36 @@ class MainViewModel @Inject constructor(
         loading()
     }
 
-    fun switchAccount(newAccountModel: AccountModel) = viewModelScope.launch(Dispatchers.IO) {
+    fun switchAccount(newAccountName: String) = viewModelScope.launch(Dispatchers.IO) {
         _account.value?.let { oldAccountModel ->
-            val switchAccountModel = SwitchAccountModel(oldAccountModel, newAccountModel)
+            val switchAccountModel = SwitchAccountModel(oldAccountModel.name, newAccountName)
             switchAccountUseCase.execute(switchAccountModel)
                 .onStart { _state.loading() }
-                .catch { _state.error(it) }
                 .collectLatest { _state.success() }
         }
     }
 
-    private fun Result<List<AccountModel>>.toAccountsModel() =
-        if (isFailure) listOf()
-        else {
-            val accounts = getOrNull()
-            val account = accounts?.find { it.active }
-                ?: accounts?.last()
-
-            account?.let {
-                _account.postValue(it)
+    private fun Result<List<AccountModel>>.updateAccounts() {
+        exceptionOrNull()
+            ?.let { _state.error(it) }
+            ?: run {
+                getOrNull()?.let { accounts ->
+                    accounts.find { it.active }?.let {
+                        _accounts.postValue(accounts)
+                        _account.postValue(it)
+                    } ?: run {
+                        val accountsWithActiveAccount = accounts.setActiveAccount()
+                        _accounts.postValue(accountsWithActiveAccount)
+                        _account.postValue(accountsWithActiveAccount.first())
+                        println(accountsWithActiveAccount)
+                    }
+                } ?: run { listOf<List<AccountModel>>() }
             }
+    }
 
-            accounts ?: listOf()
-        }
+    private fun List<AccountModel>.setActiveAccount() = mapIndexed { index, accountModel ->
+        println("$index - $accountModel")
+        if (index == 0) accountModel.copy(active = true)
+        else accountModel
+    }
 }

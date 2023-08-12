@@ -12,16 +12,16 @@ import com.taxapprf.taxapp.databinding.ActivityMainDrawerHeaderItemBinding
 class MainAccountsAdapter(
     private val callback: () -> MainAccountsAdapterCallback,
 ) : ListAdapter<AccountModel, RecyclerView.ViewHolder>(DiffCallback()) {
-    private var isSkipActivePosition = false
-    override fun getItemViewType(position: Int): Int {
-        if (!position.isLast() && getItem(position).active) isSkipActivePosition = true
+    override fun getItemCount(): Int {
+        return super.getItemCount() + 1
+    }
 
+    override fun getItemViewType(position: Int): Int {
         return if (position.isLast()) VIEW_TYPE_ADD
         else VIEW_TYPE_ITEM
     }
 
-    private fun Int.getCurrentPosition() = if (isSkipActivePosition) this + 1 else this
-    private fun Int.isLast() = this.getCurrentPosition() + 1 == itemCount
+    private fun Int.isLast() = this + 1 == itemCount
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -47,7 +47,7 @@ class MainAccountsAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is MainAccountsAdapterViewHolder -> holder.bind(getItem(position.getCurrentPosition()))
+            is MainAccountsAdapterViewHolder -> holder.bind(getItem(position))
         }
     }
 

@@ -35,9 +35,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val accountsAdapter = MainAccountsAdapter {
         object : MainAccountsAdapterCallback {
-            override fun onClick(accountModel: AccountModel) {
+            override fun onClick(accountName: String) {
                 binding.drawerLayout.close()
-                viewModel.switchAccount(accountModel)
+                viewModel.switchAccount(accountName)
             }
 
             override fun onClickAdd() {
@@ -128,8 +128,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun MainViewModel.observeAccounts() {
-        accounts.observe(this@MainActivity) {
-            if (it.isNotEmpty()) accountsAdapter.submitList(it)
+        accounts.observe(this@MainActivity) { accounts ->
+            if (accounts.isNotEmpty()) accountsAdapter.submitList(accounts.filter { !it.active })
             else onLoadingError(DataErrorAuth())
         }
     }

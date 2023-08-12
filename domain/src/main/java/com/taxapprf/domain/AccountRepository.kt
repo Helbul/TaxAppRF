@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface AccountRepository {
     fun getAccounts(): Flow<Result<List<AccountModel>>>
-    fun switchAccount(switchAccountModel: SwitchAccountModel): Flow<Nothing>
+    fun switchAccount(switchAccountModel: SwitchAccountModel): Flow<Unit>
 }

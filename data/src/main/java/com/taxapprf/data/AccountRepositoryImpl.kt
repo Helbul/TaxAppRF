@@ -3,7 +3,6 @@ package com.taxapprf.data
 import com.taxapprf.data.remote.firebase.FirebaseAccountDaoImpl
 import com.taxapprf.data.remote.firebase.model.FirebaseAccountModel
 import com.taxapprf.domain.AccountRepository
-import com.taxapprf.domain.account.AccountModel
 import com.taxapprf.domain.account.SwitchAccountModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -14,19 +13,16 @@ class AccountRepositoryImpl @Inject constructor(
 ) : AccountRepository {
     override fun getAccounts() = firebaseAccountDao.getAccounts()
 
-    override fun switchAccount(switchAccountModel: SwitchAccountModel): Flow<Nothing> =
+    override fun switchAccount(switchAccountModel: SwitchAccountModel): Flow<Unit> =
         flow {
             with(switchAccountModel) {
-                println(switchAccountModel)
                 firebaseAccountDao.saveAccounts(
                     mapOf(
-                        oldAccountModel.name to oldAccountModel.toFirebaseAccountModel(),
-                        newAccountModel.name to newAccountModel.toFirebaseAccountModel()
+                        oldAccountName to FirebaseAccountModel(oldAccountName, false),
+                        newAccountName to FirebaseAccountModel(newAccountName, true)
                     )
                 )
             }
+            emit(Unit)
         }
-
-    private fun AccountModel.toFirebaseAccountModel() =
-        FirebaseAccountModel(name.trim(), !active)
 }

@@ -23,7 +23,7 @@ class AccountAddViewModel @Inject constructor(
         oldAccountModel?.let { oldAccountModel ->
             if (accountName.isErrorInputAccountChecker()) return
 
-            val switchAccountModel = SwitchAccountModel(oldAccountModel, AccountModel(accountName))
+            val switchAccountModel = SwitchAccountModel(oldAccountModel.name, accountName)
 
             viewModelScope.launch(Dispatchers.IO) {
                 switchAccountUseCase.execute(switchAccountModel)
