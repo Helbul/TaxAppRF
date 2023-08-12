@@ -13,9 +13,10 @@ import com.taxapprf.data.error.SignInErrorWrongPassword
 import com.taxapprf.data.error.SignUpErrorEmailAlreadyUse
 import com.taxapprf.data.error.AuthErrorSessionExpired
 import com.taxapprf.taxapp.R
+import com.taxapprf.taxapp.ui.activity.MainViewModel
 
 open class BaseFragment(layoutId: Int) : Fragment(layoutId) {
-    private val loading by lazy { requireActivity() as Loading }
+    private val loading by lazy { requireActivity() as LoadingFragment }
     private lateinit var baseViewModel: BaseViewModel
     protected val activityViewModel by activityViewModels<MainViewModel>()
     protected val currentStackSavedState by lazy {

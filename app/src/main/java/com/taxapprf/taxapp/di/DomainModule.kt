@@ -5,7 +5,7 @@ import com.taxapprf.data.CurrencyRepositoryImpl
 import com.taxapprf.data.UserRepositoryImpl
 import com.taxapprf.data.ReportRepositoryImpl
 import com.taxapprf.data.TransactionRepositoryImpl
-import com.taxapprf.domain.account.ChangeAccountUseCase
+import com.taxapprf.domain.account.SwitchAccountUseCase
 import com.taxapprf.domain.currency.GetCurrencyRateTodayFromCBRUseCase
 import com.taxapprf.domain.report.DeleteReportUseCase
 import com.taxapprf.domain.report.GetReportsUseCase
@@ -54,7 +54,7 @@ object DomainModule {
 
     @Provides
     fun provideChangeAccountUseCase(repositoryImpl: AccountRepositoryImpl) =
-        ChangeAccountUseCase(repositoryImpl)
+        SwitchAccountUseCase(repositoryImpl)
 
     @Provides
     fun provideGetTodayCBRRateUseCase(repositoryImpl: CurrencyRepositoryImpl) =

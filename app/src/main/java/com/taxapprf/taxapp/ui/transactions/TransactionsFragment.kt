@@ -1,7 +1,6 @@
 package com.taxapprf.taxapp.ui.transactions
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -13,7 +12,7 @@ import com.taxapprf.taxapp.R
 import com.taxapprf.taxapp.databinding.FragmentTransactionsBinding
 import com.taxapprf.taxapp.ui.BaseFragment
 import com.taxapprf.taxapp.ui.BaseState
-import com.taxapprf.taxapp.ui.MainViewModel
+import com.taxapprf.taxapp.ui.activity.MainViewModel
 import com.taxapprf.taxapp.ui.checkStoragePermission
 import dagger.hilt.android.AndroidEntryPoint
 

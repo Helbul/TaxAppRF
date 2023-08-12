@@ -1,6 +1,6 @@
 package com.taxapprf.taxapp.ui
 
-interface Loading {
+interface LoadingFragment {
     fun onLoadingStart()
 
     fun onLoadingStop()
