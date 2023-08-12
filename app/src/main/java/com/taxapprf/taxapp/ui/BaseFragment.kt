@@ -13,10 +13,11 @@ import com.taxapprf.data.error.SignInErrorWrongPassword
 import com.taxapprf.data.error.SignUpErrorEmailAlreadyUse
 import com.taxapprf.data.error.AuthErrorSessionExpired
 import com.taxapprf.taxapp.R
+import com.taxapprf.taxapp.ui.activity.MainActivity
 import com.taxapprf.taxapp.ui.activity.MainViewModel
 
 open class BaseFragment(layoutId: Int) : Fragment(layoutId) {
-    private val loading by lazy { requireActivity() as LoadingFragment }
+    private val loading by lazy { requireActivity() as MainActivity }
     private lateinit var baseViewModel: BaseViewModel
     protected val activityViewModel by activityViewModels<MainViewModel>()
     protected val currentStackSavedState by lazy {
@@ -46,29 +47,15 @@ open class BaseFragment(layoutId: Int) : Fragment(layoutId) {
 
     private fun prepOnLoadingError(t: Throwable) {
         loading.onLoadingStop()
-
-        val stringResId = when (t) {
-            is DataErrorAuth -> R.string.auth_error
-            is AuthErrorSessionExpired -> R.string.auth_error_session_expire
-            is InputErrorNameEmpty -> R.string.error_name_empty
-            is InputErrorPhoneEmpty -> R.string.error_phone_empty
-            is InputErrorEmailEmpty -> R.string.error_email_empty
-            is InputErrorEmailIncorrect -> R.string.error_email_incorrect
-            is InputErrorPasswordLength -> R.string.error_password_length
-            is SignInErrorWrongPassword -> R.string.error_sign_in
-            is SignUpErrorEmailAlreadyUse -> R.string.sign_up_error_email_already_use
-            else -> throw t
-        }
-
-        onLoadingError(stringResId)
+        onLoadingError(t)
     }
 
     protected open fun onLoading() {
         loading.onLoadingStart()
     }
 
-    protected open fun onLoadingError(stringResId: Int) {
-        loading.onLoadingError(stringResId)
+    protected open fun onLoadingError(t: Throwable) {
+        loading.onLoadingError(t)
     }
 
     protected open fun onSuccess() {

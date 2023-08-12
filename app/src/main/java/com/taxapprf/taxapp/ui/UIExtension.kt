@@ -9,6 +9,16 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
+import com.taxapprf.data.error.AuthErrorSessionExpired
+import com.taxapprf.data.error.DataErrorAuth
+import com.taxapprf.data.error.InputErrorEmailEmpty
+import com.taxapprf.data.error.InputErrorEmailIncorrect
+import com.taxapprf.data.error.InputErrorNameEmpty
+import com.taxapprf.data.error.InputErrorPasswordLength
+import com.taxapprf.data.error.InputErrorPhoneEmpty
+import com.taxapprf.data.error.SignInErrorWrongPassword
+import com.taxapprf.data.error.SignUpErrorEmailAlreadyUse
+import com.taxapprf.taxapp.R
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -46,3 +56,16 @@ fun Date.format(): String {
 }
 
 fun Double.format() = floor(this * 100.0) / 100.0
+
+fun Throwable.getErrorDescription() = when (this) {
+    is DataErrorAuth -> R.string.auth_error
+    is AuthErrorSessionExpired -> R.string.auth_error_session_expire
+    is InputErrorNameEmpty -> R.string.error_name_empty
+    is InputErrorPhoneEmpty -> R.string.error_phone_empty
+    is InputErrorEmailEmpty -> R.string.error_email_empty
+    is InputErrorEmailIncorrect -> R.string.error_email_incorrect
+    is InputErrorPasswordLength -> R.string.error_password_length
+    is SignInErrorWrongPassword -> R.string.error_sign_in
+    is SignUpErrorEmailAlreadyUse -> R.string.sign_up_error_email_already_use
+    else -> throw this
+}

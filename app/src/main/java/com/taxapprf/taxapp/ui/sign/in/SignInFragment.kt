@@ -9,6 +9,7 @@ import com.taxapprf.taxapp.R
 import com.taxapprf.taxapp.databinding.FragmentSignInBinding
 import com.taxapprf.taxapp.ui.BaseFragment
 import com.taxapprf.taxapp.ui.BaseState
+import com.taxapprf.taxapp.ui.getErrorDescription
 import com.taxapprf.taxapp.ui.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,8 +35,8 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
             }
         }
 
-    override fun onLoadingError(stringResId: Int) {
-        binding.root.showSnackBar(stringResId)
+    override fun onLoadingError(t: Throwable) {
+        binding.root.showSnackBar(t.getErrorDescription())
     }
 
     private fun signIn() {

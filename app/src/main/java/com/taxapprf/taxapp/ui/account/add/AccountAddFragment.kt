@@ -1,6 +1,5 @@
 package com.taxapprf.taxapp.ui.account.add
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -9,7 +8,7 @@ import com.taxapprf.taxapp.R
 import com.taxapprf.taxapp.databinding.FragmentAccountAddBinding
 import com.taxapprf.taxapp.ui.BaseFragment
 import com.taxapprf.taxapp.ui.BaseState
-import com.taxapprf.taxapp.ui.activity.MainActivity
+import com.taxapprf.taxapp.ui.activity.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,12 +23,19 @@ class AccountAddFragment : BaseFragment(R.layout.fragment_account_add) {
 
         viewModel.attachToBaseFragment()
         viewModel.observeState()
+        activityViewModel.observeAccount()
+    }
+
+    private fun MainViewModel.observeAccount() {
+        account.observe(viewLifecycleOwner) {
+            viewModel.oldAccountModel = it
+        }
     }
 
     private fun AccountAddViewModel.observeState() =
         state.observe(viewLifecycleOwner) {
             when (it) {
-                is BaseState.Success -> navToMainActivity()
+                is BaseState.Success -> popBackStack()
                 else -> {}
             }
         }
@@ -37,10 +43,5 @@ class AccountAddFragment : BaseFragment(R.layout.fragment_account_add) {
     private fun accountCreate() {
         val accountName = binding.editNewAccountName.text.toString()
         viewModel.saveAccount(accountName)
-    }
-
-    private fun navToMainActivity() {
-        startActivity(Intent(activity, MainActivity::class.java))
-        requireActivity().finish()
     }
 }

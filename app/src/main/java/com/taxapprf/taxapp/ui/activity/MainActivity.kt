@@ -11,14 +11,15 @@ import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.taxapprf.data.error.DataErrorAuth
 import com.taxapprf.domain.account.AccountModel
 import com.taxapprf.taxapp.R
 import com.taxapprf.taxapp.databinding.ActivityMainBinding
-import com.taxapprf.taxapp.ui.LoadingFragment
+import com.taxapprf.taxapp.ui.getErrorDescription
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(R.layout.activity_main), LoadingFragment {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val viewModel by viewModels<MainViewModel>()
 
@@ -63,6 +64,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), LoadingFragment 
 
         drawer.recycler.adapter = accountsAdapter
 
+        binding.appBarMain.content.loadingRetry.setOnClickListener { viewModel.loading() }
+
         viewModel.observeState()
         viewModel.observeAccounts()
         viewModel.observeAccount()
@@ -78,19 +81,26 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), LoadingFragment 
         return (navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp())
     }
 
-    override fun onLoadingStart() {
-        binding.appBarMain.content.loading.isVisible = true
+    fun onLoadingStart() {
+        with(binding.appBarMain.content) {
+            loadingErrorGroup.isVisible = false
+            loading.isVisible = true
+        }
     }
 
-    override fun onLoadingStop() {
+    fun onLoadingStop() {
         binding.appBarMain.content.loading.isVisible = false
     }
 
-    override fun onLoadingError(stringResId: Int) {
+    fun onLoadingError(t: Throwable) {
         onLoadingStop()
+        with(binding.appBarMain.content) {
+            loadingErrorGroup.isVisible = true
+            loadingErrorMessage.setText(t.getErrorDescription())
+        }
     }
 
-    override fun onLoadingSuccess() {
+    fun onLoadingSuccess() {
         onLoadingStop()
     }
 
@@ -105,7 +115,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), LoadingFragment 
         state.observe(this@MainActivity) {
             when (it) {
                 is Loading -> onLoadingStart()
-                is Error -> onLoadingError(22)
+                is Error -> onLoadingError(it.t)
                 is Success -> onLoadingSuccess()
             }
         }
@@ -120,6 +130,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), LoadingFragment 
     private fun MainViewModel.observeAccounts() {
         accounts.observe(this@MainActivity) {
             if (it.isNotEmpty()) accountsAdapter.submitList(it)
+            else onLoadingError(DataErrorAuth())
         }
     }
 
