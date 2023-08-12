@@ -69,7 +69,7 @@ class MainViewModel @Inject constructor(
         else {
             val accounts = getOrNull()
             val account = accounts?.find { it.active }
-                ?: accounts?.first()
+                ?: accounts?.last()
 
             account?.let {
                 _account.postValue(it)
