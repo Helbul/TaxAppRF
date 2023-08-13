@@ -3,38 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/offset_8"
+    android:minHeight="@dimen/item_size"
+    android:paddingHorizontal="@dimen/offset_16">
+
+    <TextView
+        android:id="@+id/textViewCurrencyName"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/offset_16"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCurrencyCode"
+        app:layout_constraintEnd_toStartOf="@+id/textViewCurrencyRate"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="name" />
 
     <TextView
         android:id="@+id/textViewCurrencyCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="code"
+        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewCurrencyName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:text="name"
-        app:layout_constraintEnd_toStartOf="@+id/textViewCurrencyRate"
-        app:layout_constraintStart_toEndOf="@+id/textViewCurrencyCode"
-        app:layout_constraintTop_toTopOf="@+id/textViewCurrencyCode" />
+        app:layout_constraintStart_toStartOf="@+id/textViewCurrencyName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCurrencyName"
+        tools:text="code" />
 
     <TextView
         android:id="@+id/textViewCurrencyRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="right"
-        android:text="rate"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCurrencyCode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/textViewCurrencyCode"
+        tools:text="rate" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCurrencyCode" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

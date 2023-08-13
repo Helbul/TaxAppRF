@@ -25,6 +25,7 @@ class CurrencyConverterFragment : BaseFragment(R.layout.fragment_currency_conver
 
         prepCurrencies()
         setListeners()
+        viewModel.attachToBaseFragment()
         viewModel.observeConverter()
     }
 

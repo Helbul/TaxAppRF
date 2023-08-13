@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.onStart
 import java.util.Calendar
 import javax.inject.Inject
 
-
 @HiltViewModel
 class CurrencyRatesTodayViewModel @Inject constructor(
     getTodayCBRRateUseCase: GetCurrencyRateTodayFromCBRUseCase,

@@ -9,18 +9,16 @@ import com.taxapprf.taxapp.databinding.FragmentRatesTodayBinding
 import com.taxapprf.taxapp.ui.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class CurrencyRatesTodayFragment : BaseFragment(R.layout.fragment_rates_today) {
     private val binding by viewBinding(FragmentRatesTodayBinding::bind)
     private val viewModel by viewModels<CurrencyRatesTodayViewModel>()
     private val adapter = CurrencyRatesTodayAdapter()
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerviewCurrencies.adapter = adapter
 
+        viewModel.attachToBaseFragment()
         viewModel.currencies.observe(viewLifecycleOwner) {
             adapter.submitList(it)
             println(it)
