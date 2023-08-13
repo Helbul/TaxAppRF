@@ -32,12 +32,9 @@ class TransactionsFragment : BaseFragment(R.layout.fragment_transactions) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         binding.recyclerTransactions.adapter = adapter
 
-
-        binding.buttonTransAdd.setOnClickListener {
+        fab.setOnClickListener {
             activityViewModel.report = viewModel.report
             findNavController().navigate(R.id.action_transactions_to_transaction_detail)
         }

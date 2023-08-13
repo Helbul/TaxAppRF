@@ -5,6 +5,7 @@ import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.coroutineScope
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.navigateUp
@@ -12,19 +13,20 @@ import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.taxapprf.data.error.DataErrorAuth
-import com.taxapprf.domain.account.AccountModel
 import com.taxapprf.taxapp.R
 import com.taxapprf.taxapp.databinding.ActivityMainBinding
 import com.taxapprf.taxapp.ui.getErrorDescription
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
-    private val binding by viewBinding(ActivityMainBinding::bind)
+    val binding by viewBinding(ActivityMainBinding::bind)
     private val viewModel by viewModels<MainViewModel>()
 
     private val mAppBarConfiguration by lazy {
-        AppBarConfiguration(topLevelDestination, binding.drawerLayout)
+        AppBarConfiguration(topLevelDestinations, binding.drawerLayout)
     }
 
     val navController by lazy {
@@ -104,11 +106,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         onLoadingStop()
     }
 
-    private val topLevelDestination = setOf(
+    private val topLevelDestinations = setOf(
         R.id.sign,
         R.id.currency_rates_today,
         R.id.reports,
         R.id.currency_converter,
+    )
+
+    private val fabVisibleDestinations = setOf(
+        R.id.reports,
+        R.id.transactions,
     )
 
     private fun MainViewModel.observeState() {
@@ -129,8 +136,25 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun MainViewModel.observeAccounts() {
         accounts.observe(this@MainActivity) { accounts ->
-            if (accounts.isNotEmpty()) accountsAdapter.submitList(accounts.filter { !it.active })
-            else onLoadingError(DataErrorAuth())
+            if (accounts.isNotEmpty()) {
+                accountsAdapter.submitList(accounts.filter { !it.active })
+                fabVisibilityManager()
+            } else {
+                onLoadingError(DataErrorAuth())
+            }
+        }
+    }
+
+    private fun fabVisibilityManager() {
+        lifecycle.coroutineScope.launch {
+            navController.currentBackStack.collectLatest { navBackStackEntries ->
+                viewModel.account.value?.let {
+                    if (fabVisibleDestinations.contains(navBackStackEntries.last().destination.id))
+                        binding.appBarMain.fab.show()
+                    else
+                        binding.appBarMain.fab.hide()
+                }
+            }
         }
     }
 

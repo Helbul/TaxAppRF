@@ -2,10 +2,10 @@ package com.taxapprf.taxapp.ui.reports
 
 import androidx.recyclerview.widget.RecyclerView
 import com.taxapprf.domain.report.ReportModel
-import com.taxapprf.taxapp.databinding.FragmentTaxesAdapterItemBinding
+import com.taxapprf.taxapp.databinding.FragmentReportsAdapterItemBinding
 
 class ReportsAdapterViewHolder(
-    private val binding: FragmentTaxesAdapterItemBinding,
+    private val binding: FragmentReportsAdapterItemBinding,
     private val callback: ReportsAdapterCallback,
 ) : RecyclerView.ViewHolder(binding.root) {
     private lateinit var report: ReportModel

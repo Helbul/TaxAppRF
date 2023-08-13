@@ -61,7 +61,7 @@
         android:id="@+id/reports"
         android:name="com.taxapprf.taxapp.ui.reports.ReportsFragment"
         android:label="@string/menuTaxes"
-        tools:layout="@layout/fragment_taxes">
+        tools:layout="@layout/fragment_reports">
         <action
             android:id="@+id/action_reports_to_transactions"
             app:destination="@id/transactions"

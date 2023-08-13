@@ -8,14 +8,14 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.taxapprf.domain.report.ReportModel
 import com.taxapprf.taxapp.R
-import com.taxapprf.taxapp.databinding.FragmentTaxesBinding
+import com.taxapprf.taxapp.databinding.FragmentReportsBinding
 import com.taxapprf.taxapp.ui.BaseFragment
 import com.taxapprf.taxapp.ui.checkStoragePermission
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ReportsFragment : BaseFragment(R.layout.fragment_taxes) {
-    private val binding by viewBinding(FragmentTaxesBinding::bind)
+class ReportsFragment : BaseFragment(R.layout.fragment_reports) {
+    private val binding by viewBinding(FragmentReportsBinding::bind)
     private val viewModel by viewModels<ReportsViewModel>()
     private val adapter = ReportsAdapter {
         object : ReportsAdapterCallback {
@@ -28,7 +28,7 @@ class ReportsFragment : BaseFragment(R.layout.fragment_taxes) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonTaxesAddTrans.setOnClickListener { navToTransactionDetail() }
+        fab.setOnClickListener { navToTransactionDetail() }
         binding.buttonTaxesLoading.setOnClickListener { navToSystemStorage() }
         binding.recyclerYearStatements.adapter = adapter
 
