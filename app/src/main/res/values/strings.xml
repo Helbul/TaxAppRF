@@ -140,5 +140,8 @@
     <string name="drawer_header_add_name">Добавить аккаунт</string>
     <string name="add_name">Добавить</string>
     <string name="retry_name">Повторить</string>
+    <string name="share_excel_name">Отправить</string>
+    <string name="import_excel_name">Импорт</string>
+    <string name="export_excel_name">Экспорт</string>
 
 </resources>
