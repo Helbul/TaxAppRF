@@ -16,6 +16,9 @@ class CurrencyRatesTodayFragment : BaseFragment(R.layout.fragment_rates_today) {
     private val adapter = CurrencyRatesTodayAdapter()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        toolbar.updateMenu()
+
         binding.recyclerviewCurrencies.adapter = adapter
 
         viewModel.attachToBaseFragment()

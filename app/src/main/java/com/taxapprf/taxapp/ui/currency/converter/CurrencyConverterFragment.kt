@@ -23,6 +23,8 @@ class CurrencyConverterFragment : BaseFragment(R.layout.fragment_currency_conver
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        toolbar.updateMenu()
+
         prepCurrencies()
         setListeners()
         viewModel.attachToBaseFragment()

@@ -16,6 +16,8 @@ class SignFragment : BaseFragment(R.layout.fragment_sign) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        toolbar.updateMenu()
+
         if (activityViewModel.isSignIn) {
             navToReports()
             activityViewModel.loading()
@@ -27,7 +29,7 @@ class SignFragment : BaseFragment(R.layout.fragment_sign) {
     }
 
     private fun navToReports() {
-        findNavController().navigate(R.id.action_sign_to_reports)
+        findNavController().navigate(R.id.action_global_reports)
     }
 
     private fun navToSignIn() {
