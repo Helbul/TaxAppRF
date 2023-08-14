@@ -91,11 +91,10 @@ class TransactionsFragment : BaseFragment(R.layout.fragment_transactions) {
         }
 
     private fun updateUI() {
-        binding.textTransYearSum.text = String.format(
-            getString(R.string.transactions_tax_sum),
-            viewModel.report.year,
-            viewModel.report.tax
-        )
+        val title = String.format(getString(R.string.transactions_title), viewModel.report.year)
+        val subtitle =
+            String.format(getString(R.string.transactions_subtitle), viewModel.report.tax)
+        toolbar.updateToolbar(title, subtitle)
     }
 
     /*    override fun onCreateView(

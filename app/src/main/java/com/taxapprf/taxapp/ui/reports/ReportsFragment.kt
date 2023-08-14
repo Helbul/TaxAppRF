@@ -24,9 +24,10 @@ class ReportsFragment : BaseFragment(R.layout.fragment_reports) {
             }
         }
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        toolbar.updateToolbar(getString(R.string.taxes_name))
 
         fab.setOnClickListener { navToTransactionDetail() }
         binding.buttonTaxesLoading.setOnClickListener { navToSystemStorage() }

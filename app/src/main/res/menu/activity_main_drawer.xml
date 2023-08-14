@@ -7,7 +7,7 @@
         <item
             android:id="@+id/reports"
             android:icon="@drawable/ic_baseline_monetization_on_24"
-            android:title="@string/menuTaxes" />
+            android:title="@string/taxes_name" />
 
         <item
             android:id="@+id/currency_rates_today"

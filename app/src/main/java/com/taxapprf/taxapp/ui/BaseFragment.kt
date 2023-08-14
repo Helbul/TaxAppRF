@@ -14,6 +14,7 @@ open class BaseFragment(layoutId: Int) : Fragment(layoutId) {
         findNavController().currentBackStackEntry!!.savedStateHandle
     }
     protected val fab by lazy { mainActivity.binding.appBarMain.fab }
+    protected val toolbar by lazy { mainActivity.toolbar }
 
     protected fun BaseViewModel.attachToBaseFragment() {
         baseViewModel = this

@@ -15,6 +15,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.taxapprf.data.error.DataErrorAuth
 import com.taxapprf.taxapp.R
 import com.taxapprf.taxapp.databinding.ActivityMainBinding
+import com.taxapprf.taxapp.ui.MainDrawer
+import com.taxapprf.taxapp.ui.MainToolbar
 import com.taxapprf.taxapp.ui.getErrorDescription
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -33,7 +35,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         findNavController(this, R.id.nav_host_fragment_content_main)
     }
 
-    private val drawer by lazy { MainActivityDrawer(binding.navView) }
+    private val drawer by lazy { MainDrawer(binding.navView) }
+    val toolbar by lazy { MainToolbar(binding.appBarMain.toolbar) }
 
     private val accountsAdapter = MainAccountsAdapter {
         object : MainAccountsAdapterCallback {

@@ -60,7 +60,6 @@
     <fragment
         android:id="@+id/reports"
         android:name="com.taxapprf.taxapp.ui.reports.ReportsFragment"
-        android:label="@string/menuTaxes"
         tools:layout="@layout/fragment_reports">
         <action
             android:id="@+id/action_reports_to_transactions"
@@ -81,7 +80,6 @@
     <fragment
         android:id="@+id/transactions"
         android:name="com.taxapprf.taxapp.ui.transactions.TransactionsFragment"
-        android:label="@string/menuTransactions"
         tools:layout="@layout/fragment_transactions">
         <action
             android:id="@+id/action_transactions_to_transaction_detail"

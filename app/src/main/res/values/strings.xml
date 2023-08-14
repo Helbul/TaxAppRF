@@ -27,9 +27,9 @@
     <string name="menuRatesToday">Курсы валют на сегодня</string>
     <string name="menuConverter">Конвертер валют</string>
     <string name="menuNewTransaction">Новая сделка</string>
-    <string name="menuTaxes">Налоги</string>
     <string name="menuTransactionDetail">Редактирование сделки</string>
     <string name="menuTransactions">Годовой отчет</string>
+    <string name="taxes_name">Налоги</string>
 
 
     <!--LoginFragment-->
@@ -97,8 +97,8 @@
     <string name="buttonTransDownload">Скачать отчет</string>
     <string name="buttonTransSendEmail">Отправить на E-mail</string>
     <string name="transactions_error_send_report">Не удалось отправить отчет.</string>
-    <string name="transactions_tax_sum">Налог за %s год: %s</string>
-
+    <string name="transactions_title">Отчет за %s год</string>
+    <string name="transactions_subtitle">налог %s ₽</string>
 
     <!-- TransactionsDeleteDialogFragment -->
     <string name="transactions_delete_title">Подтвердить операцию</string>
