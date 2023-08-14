@@ -31,37 +31,33 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/linearTrans"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/buttonTransAdd"
-            android:layout_width="wrap_content"
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="15dp"
-            android:layout_weight="1"
-            android:elevation="6dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:src="@drawable/ic_baseline_add_circle_24"
-            android:stateListAnimator="@animator/button_elevation"
-            android:translationZ="4dp" />
+            android:layout_gravity="bottom"
+            android:background="@android:color/white"
+            android:backgroundTint="@color/color_primary_dark_night"
+            app:backgroundTint="@android:color/white"
+            />
 
         <androidx.appcompat.widget.AppCompatImageButton
+            style="@style/Widget.Material3.Button.IconButton"
             android:id="@+id/buttonTransDeleteYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
@@ -70,14 +66,19 @@
             android:paddingBottom="5dp"
             android:src="@drawable/ic_baseline_delete_24"
             android:stateListAnimator="@animator/button_elevation"
-            android:translationZ="4dp" />
+            android:translationZ="4dp"
+            app:backgroundTint="@color/color_primary"
+            app:layout_anchor="@+id/buttonTransDeleteYear"
+            app:layout_anchorGravity="end|center" />
+
 
         <androidx.appcompat.widget.AppCompatImageButton
+            style="@style/Widget.Material3.Button.IconButton"
             android:id="@+id/buttonTransDownload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
@@ -86,24 +87,44 @@
             android:paddingBottom="5dp"
             android:src="@drawable/ic_baseline_download_24"
             android:stateListAnimator="@animator/button_elevation"
-            android:translationZ="4dp" />
+            android:translationZ="4dp"
+            app:backgroundTint="@color/color_primary"
+            app:layout_anchor="@+id/buttonTransDownload"
+            app:layout_anchorGravity="start|center" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/buttonTransSendEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="110dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
-            android:elevation="6dp"
+            android:elevation="1dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:src="@drawable/ic_baseline_email_24"
-            android:stateListAnimator="@animator/button_elevation"
-            android:translationZ="4dp" />
-    </LinearLayout>
+            android:stateListAnimator="@null"
+            android:translationZ="4dp"
+            app:backgroundTint="@color/color_primary"
+            app:layout_anchor="@+id/buttonTransSendEmail"
+            app:layout_anchorGravity="center" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddTrans"
+            style="@style/Widget.Material3.FloatingActionButton.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="320dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_baseline_add_24"
+            app:backgroundTint="@color/color_primary_variant_night"
+            app:fabAlignmentMode="end" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <!--
     <Button

@@ -41,16 +41,18 @@ class AccountSelectFragment : BaseFragment(R.layout.fragment_account_select) {
 
     private fun FragmentAccountSelectBinding.prepSelectSpinner() {
         buttonSelectOpen.setOnClickListener {
-            if (spinnerSelectAccount.selectedItem == null)
+            //if (spinnerSelectAccount.text == null)
+            if (spinnerSelectAccount.text == null)
                 it.showSnackBar(R.string.account_select_accounts_loading)
             // TODO() без проверки на наличие данных в спинере по нажатии открыть ошибка
             // TODO проверить смежные фрагменты
-            val accountName = spinnerSelectAccount.selectedItem.toString()
+            val accountName = spinnerSelectAccount.text.toString()
             viewModel.saveAccount(accountName)
         }
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerSelectAccount.adapter = adapter
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//        spinnerSelectAccount.adapter = adapter
+        spinnerSelectAccount
     }
 
     private fun AccountSelectViewModel.observeState() =
