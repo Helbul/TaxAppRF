@@ -36,9 +36,11 @@ class ReportsViewModel @Inject constructor(
     }
 
     fun saveReportsFromExcel(intent: Intent?) = viewModelScope.launch(Dispatchers.IO) {
-        saveReportsFromExcel.execute(intent!!.data!!.path!!)
-            .onStart { loading() }
-            .catch { error(it) }
-            .collectLatest { success() }
+        intent?.data?.path?.let { uri ->
+            saveReportsFromExcel.execute(uri)
+                .onStart { loading() }
+                .catch { error(it) }
+                .collectLatest { success() }
+        }
     }
 }

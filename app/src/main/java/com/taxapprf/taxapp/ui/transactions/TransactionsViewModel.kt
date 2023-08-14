@@ -68,4 +68,16 @@ class TransactionsViewModel @Inject constructor(
                 }
         }
     }
+
+    fun share() {
+
+    }
+
+    fun export() {
+
+    }
+
+    fun import() {
+
+    }
 }

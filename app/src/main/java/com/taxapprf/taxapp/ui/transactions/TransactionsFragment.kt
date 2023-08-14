@@ -1,6 +1,5 @@
 package com.taxapprf.taxapp.ui.transactions
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -14,6 +13,7 @@ import com.taxapprf.taxapp.ui.BaseFragment
 import com.taxapprf.taxapp.ui.BaseState
 import com.taxapprf.taxapp.ui.activity.MainViewModel
 import com.taxapprf.taxapp.ui.checkStoragePermission
+import com.taxapprf.taxapp.ui.share
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -31,6 +31,27 @@ class TransactionsFragment : BaseFragment(R.layout.fragment_transactions) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        toolbar.updateMenu(R.menu.transactions_toolbar) {
+            when (it.itemId) {
+                R.id.toolbar_share_excel -> {
+                    viewModel.share()
+                    true
+                }
+
+                R.id.toolbar_export_excel -> {
+                    viewModel.export()
+                    true
+                }
+
+                R.id.toolbar_import_excel -> {
+                    viewModel.import()
+                    true
+                }
+
+                else -> false
+            }
+        }
 
         binding.recyclerTransactions.adapter = adapter
 
@@ -131,13 +152,7 @@ class TransactionsFragment : BaseFragment(R.layout.fragment_transactions) {
 */
 
     private fun startIntentSendEmail() {
-        viewModel.emailUri?.let {
-            val emailIntent = Intent(Intent.ACTION_SEND)
-            emailIntent.type = "vnd.android.cursor.dir/email"
-            emailIntent.putExtra(Intent.EXTRA_STREAM, it)
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Расчёт налога от TaxApp")
-            requireActivity().startActivity(Intent.createChooser(emailIntent, "Send email..."))
-        }
+        viewModel.emailUri?.let { requireActivity().share(it) }
     }
 
     private fun navToTransactionDelete() {

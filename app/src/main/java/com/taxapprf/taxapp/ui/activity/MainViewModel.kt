@@ -50,10 +50,6 @@ class MainViewModel @Inject constructor(
             }
     }
 
-    init {
-        loading()
-    }
-
     fun switchAccount(newAccountName: String) = viewModelScope.launch(Dispatchers.IO) {
         _account.value?.let { oldAccountModel ->
             val switchAccountModel = SwitchAccountModel(oldAccountModel.name, newAccountName)

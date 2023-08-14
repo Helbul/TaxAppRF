@@ -3,18 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/reports">
+    app:startDestination="@id/sign">
 
     <action
         android:id="@+id/action_global_account_add"
         app:destination="@id/account_add"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
-    <action
-        android:id="@+id/action_global_sign"
-        app:destination="@id/sign"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
@@ -45,6 +38,11 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_sign_to_reports"
+            app:destination="@id/reports"
+            app:popUpTo="@id/reports"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

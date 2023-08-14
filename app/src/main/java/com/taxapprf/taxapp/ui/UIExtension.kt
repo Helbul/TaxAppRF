@@ -3,7 +3,9 @@ package com.taxapprf.taxapp.ui
 import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
@@ -19,7 +21,6 @@ import com.taxapprf.data.error.InputErrorPhoneEmpty
 import com.taxapprf.data.error.SignInErrorWrongPassword
 import com.taxapprf.data.error.SignUpErrorEmailAlreadyUse
 import com.taxapprf.taxapp.R
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -68,4 +69,12 @@ fun Throwable.getErrorDescription() = when (this) {
     is SignInErrorWrongPassword -> R.string.error_sign_in
     is SignUpErrorEmailAlreadyUse -> R.string.sign_up_error_email_already_use
     else -> throw this
+}
+
+fun Activity.share(uri: Uri) {
+    val emailIntent = Intent(Intent.ACTION_SEND)
+    emailIntent.type = "vnd.android.cursor.dir/email"
+    emailIntent.putExtra(Intent.EXTRA_STREAM, uri)
+    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Расчёт налога от TaxApp")
+    startActivity(Intent.createChooser(emailIntent, "Send email..."))
 }

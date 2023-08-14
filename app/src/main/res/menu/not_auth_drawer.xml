@@ -5,11 +5,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/reports"
-            android:icon="@drawable/ic_baseline_monetization_on_24"
-            android:title="@string/taxes_name" />
-
-        <item
             android:id="@+id/currency_rates_today"
             android:icon="@drawable/ic_baseline_timeline_24"
             android:title="@string/menuRatesToday" />
@@ -18,6 +13,5 @@
             android:id="@+id/currency_converter"
             android:icon="@drawable/ic_baseline_currency_exchange_24"
             android:title="@string/menuConverter" />
-
     </group>
 </menu>

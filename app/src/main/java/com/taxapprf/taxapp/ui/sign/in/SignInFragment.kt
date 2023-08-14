@@ -30,7 +30,12 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     private fun SignInViewModel.observeState() =
         state.observe(viewLifecycleOwner) {
             when (it) {
-                is BaseState.Success -> navToReports()
+                is BaseState.Success -> {
+                    activityViewModel.loading()
+                    drawer.showAuth()
+                    navToReports()
+                }
+
                 else -> {}
             }
         }

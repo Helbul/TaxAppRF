@@ -43,6 +43,18 @@ class MainDrawer(
 
     }
 
+    fun showAuth() {
+        navView.menu.clear()
+        navView.inflateMenu(R.menu.auth_drawer)
+        accounts.isVisible = true
+    }
+
+    fun hideAuth() {
+        navView.menu.clear()
+        navView.inflateMenu(R.menu.not_auth_drawer)
+        accounts.isVisible = false
+    }
+
     companion object {
         private const val HEADER_POSITION = 0
     }

@@ -33,6 +33,8 @@ class SignUpFragment : BaseFragment(R.layout.fragment_sign_up) {
             when (it) {
                 is BaseState.Success -> {
                     binding.root.showSnackBar(R.string.message__sign_up_success)
+                    activityViewModel.loading()
+                    drawer.showAuth()
                     navToReports()
                 }
 

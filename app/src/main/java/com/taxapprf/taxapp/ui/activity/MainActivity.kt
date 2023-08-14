@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         findNavController(this, R.id.nav_host_fragment_content_main)
     }
 
-    private val drawer by lazy { MainDrawer(binding.navView) }
+    val drawer by lazy { MainDrawer(binding.navView) }
     val toolbar by lazy { MainToolbar(binding.appBarMain.toolbar) }
 
     private val accountsAdapter = MainAccountsAdapter {
@@ -57,8 +57,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        navIsUserNotSignIn()
-
         navController.setGraph(R.navigation.mobile_navigation)
 
         setSupportActionBar(binding.appBarMain.toolbar)
@@ -77,7 +75,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
+        //menuInflater.inflate(R.menu.reports_toolbar, menu)
         return true
     }
 
@@ -121,6 +119,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         R.id.transactions,
     )
 
+    private val notAuthDestinations = setOf(
+        R.id.sign,
+        R.id.sign_in,
+        R.id.sign_up
+    )
+
     private fun MainViewModel.observeState() {
         state.observe(this@MainActivity) {
             when (it) {
@@ -159,14 +163,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 }
             }
         }
-    }
-
-    private fun navIsUserNotSignIn() {
-        if (!viewModel.isSignIn) navToSign()
-    }
-
-    private fun navToSign() {
-        navController.navigate(R.id.action_global_sign)
     }
 
     private fun navToAccountAdd() {

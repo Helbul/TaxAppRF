@@ -15,7 +15,7 @@ open class BaseFragment(layoutId: Int) : Fragment(layoutId) {
     }
     protected val fab by lazy { mainActivity.binding.appBarMain.fab }
     protected val toolbar by lazy { mainActivity.toolbar }
-
+    protected val drawer by lazy { mainActivity.drawer }
     protected fun BaseViewModel.attachToBaseFragment() {
         baseViewModel = this
         baseViewModel.state.observe(viewLifecycleOwner) {

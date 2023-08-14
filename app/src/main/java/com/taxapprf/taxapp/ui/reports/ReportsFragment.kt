@@ -24,13 +24,23 @@ class ReportsFragment : BaseFragment(R.layout.fragment_reports) {
             }
         }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         toolbar.updateToolbar(getString(R.string.taxes_name))
+        toolbar.updateMenu(R.menu.reports_toolbar) {
+            when (it.itemId) {
+                R.id.toolbar_import_excel -> {
+                    navToSystemStorage()
+                    true
+                }
+
+                else -> false
+            }
+        }
 
         fab.setOnClickListener { navToTransactionDetail() }
-//        binding.buttonTaxesLoading.setOnClickListener { navToSystemStorage() }
         binding.recyclerYearStatements.adapter = adapter
 
         viewModel.attachToBaseFragment()
