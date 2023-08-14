@@ -149,5 +149,6 @@
     <string name="share_excel_name">Отправить</string>
     <string name="import_excel_name">Импорт</string>
     <string name="export_excel_name">Экспорт</string>
+    <string name="save_name">Сохранить</string>
 
 </resources>

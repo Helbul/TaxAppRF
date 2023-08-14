@@ -10,7 +10,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.taxapprf.taxapp.R
-import com.taxapprf.taxapp.databinding.FragmentNewTransactionBinding
+import com.taxapprf.taxapp.databinding.FragmentTransactionDetailBinding
 import com.taxapprf.taxapp.ui.BaseState
 import com.taxapprf.taxapp.ui.BottomSheetBaseFragment
 import com.taxapprf.taxapp.ui.showSnackBar
@@ -18,8 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
 
 @AndroidEntryPoint
-class TransactionDetailFragment : BottomSheetBaseFragment(R.layout.fragment_new_transaction) {
-    private val binding by viewBinding(FragmentNewTransactionBinding::bind)
+class TransactionDetailFragment : BottomSheetBaseFragment(R.layout.fragment_transaction_detail) {
+    private val binding by viewBinding(FragmentTransactionDetailBinding::bind)
     private val viewModel by viewModels<TransactionDetailViewModel>()
 
     private lateinit var currenciesAdapter: ArrayAdapter<String>
@@ -54,8 +54,8 @@ class TransactionDetailFragment : BottomSheetBaseFragment(R.layout.fragment_new_
         currenciesAdapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, currencies)
         currenciesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerNewTransCurrencies.adapter = currenciesAdapter
-        binding.spinnerNewTransCurrencies.setSelection(
+        binding.spinnerTransactionDetailCurrencies.adapter = currenciesAdapter
+        binding.spinnerTransactionDetailCurrencies.setSelection(
             currencies.indexOf(resources.getString(R.string.transaction_currency_usd))
         )
     }
@@ -65,67 +65,69 @@ class TransactionDetailFragment : BottomSheetBaseFragment(R.layout.fragment_new_
         typeTransactionAdapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, typeTransactions)
         typeTransactionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerNewTransType.adapter = typeTransactionAdapter
-        binding.spinnerNewTransType.setSelection(
+        binding.spinnerTransactionDetailType.adapter = typeTransactionAdapter
+        binding.spinnerTransactionDetailType.setSelection(
             typeTransactions.indexOf(resources.getString(R.string.transaction_type_trade))
         )
     }
 
     private fun prepListeners() {
-        binding.imageNewTransDate.setOnClickListener {
+        binding.buttonTransactionDetailDatePicker.setOnClickListener {
             showDatePicker {
                 DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                     viewModel.saveTransaction.updateDate(year, month, dayOfMonth)
-                    binding.editNewTransDate.setText(viewModel.saveTransaction.date)
+                    binding.editTextTransactionDetailDate.setText(viewModel.saveTransaction.date)
                 }
             }
         }
 
-        binding.buttonNewTransAdd.setOnClickListener {
+        binding.buttonTransactionDetailSave.setOnClickListener {
             viewModel.saveTransaction()
         }
 
-        binding.spinnerNewTransType.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                typeTransactionAdapter.getItem(position)?.let {
-                    viewModel.saveTransaction.type = it
+        binding.spinnerTransactionDetailType.onItemSelectedListener =
+            object : OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    typeTransactionAdapter.getItem(position)?.let {
+                        viewModel.saveTransaction.type = it
+                    }
                 }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
 
-
-        binding.spinnerNewTransCurrencies.onItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                currenciesAdapter.getItem(position)?.let {
-                    viewModel.saveTransaction.currency = it
+        binding.spinnerTransactionDetailCurrencies.onItemSelectedListener =
+            object : OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    currenciesAdapter.getItem(position)?.let {
+                        viewModel.saveTransaction.currency = it
+                    }
                 }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-
-        binding.editNewTransSum.doOnTextChanged { text, _, _, _ ->
+        binding.editTextTransactionDetailSum.doOnTextChanged { text, _, _, _ ->
             val sum = text?.toString()?.toDouble() ?: run { 0.0 }
             viewModel.saveTransaction.sum = sum
         }
 
-        binding.editNewTransId.doOnTextChanged { text, _, _, _ ->
+        binding.editTextTransactionDetailName.doOnTextChanged { text, _, _, _ ->
             viewModel.saveTransaction.name = text.toString()
         }
 
-        binding.editNewTransDate.doOnTextChanged { text, _, _, _ ->
+        binding.editTextTransactionDetailDate.doOnTextChanged { text, _, _, _ ->
             println(text)
             viewModel.saveTransaction.date = text.toString()
         }
@@ -142,20 +144,24 @@ class TransactionDetailFragment : BottomSheetBaseFragment(R.layout.fragment_new_
 
     private fun updateUI() {
         with(viewModel.saveTransaction) {
-            binding.editNewTransId.setText(name)
-            binding.editNewTransDate.setText(date)
-            if (sum > 0) binding.editNewTransSum.setText(sum.toString())
+            binding.editTextTransactionDetailName.setText(name)
+            binding.editTextTransactionDetailDate.setText(date)
+            if (sum > 0) binding.editTextTransactionDetailSum.setText(sum.toString())
             updateCurrencies(currency)
             updateTypeTransaction(type)
         }
     }
 
     private fun updateCurrencies(currency: String) {
-        binding.spinnerNewTransCurrencies.setSelection(currenciesAdapter.getPosition(currency))
+        binding.spinnerTransactionDetailCurrencies.setSelection(
+            currenciesAdapter.getPosition(
+                currency
+            )
+        )
     }
 
     private fun updateTypeTransaction(type: String) {
-        binding.spinnerNewTransType.setSelection(typeTransactionAdapter.getPosition(type))
+        binding.spinnerTransactionDetailType.setSelection(typeTransactionAdapter.getPosition(type))
     }
 
     private fun showDatePicker(listener: () -> DatePickerDialog.OnDateSetListener) {

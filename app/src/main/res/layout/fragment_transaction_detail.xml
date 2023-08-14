@@ -1,113 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.transactiondetails.TransactionDetailsFragment">
+    android:layout_height="wrap_content"
+    tools:context=".ui.transactions.detail.TransactionDetailFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_transaction_detail_type"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/min_view_size"
+        android:layout_marginStart="@dimen/offset_16"
+        android:layout_marginTop="@dimen/offset_16"
+        android:layout_marginEnd="@dimen/offset_16"
+        android:entries="@array/transaction_types"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Spinner
-            android:id="@+id/spinnerDetailType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="15dp"
-            android:entries="@array/transaction_types"
-            android:minHeight="48dp"
-            android:textSize="20sp" />
+    <EditText
+        android:id="@+id/edit_text_transaction_detail_name"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/offset_8"
+        android:hint="@string/editDetailId"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_transaction_detail_type"
+        app:layout_constraintStart_toStartOf="@+id/spinner_transaction_detail_type"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_transaction_detail_type" />
 
-        <EditText
-            android:id="@+id/editDetailId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="15dp"
-            android:ems="10"
-            android:hint="@string/editDetailId"
-            android:inputType="text"
-            android:textSize="20sp" />
+    <EditText
+        android:id="@+id/edit_text_transaction_detail_date"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/offset_16"
+        android:hint="@string/editDetailDate"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="@+id/button_transaction_detail_date_picker"
+        app:layout_constraintEnd_toStartOf="@+id/button_transaction_detail_date_picker"
+        app:layout_constraintStart_toStartOf="@+id/spinner_transaction_detail_type" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:orientation="horizontal">
+    <Button
+        android:id="@+id/button_transaction_detail_date_picker"
+        style="@style/Widget.Material3.Button.IconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:icon="@drawable/ic_baseline_calendar_month_24"
+        app:layout_constraintEnd_toEndOf="@+id/edit_text_transaction_detail_name"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_transaction_detail_name" />
 
-            <EditText
-                android:id="@+id/editDetailDate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/editDetailDate"
-                android:inputType="date"
-                android:textSize="20sp" />
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_transaction_detail_currencies"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/min_view_size"
+        android:layout_marginTop="8dp"
+        android:entries="@array/transaction_currencies"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_transaction_detail_type"
+        app:layout_constraintTop_toBottomOf="@+id/button_transaction_detail_date_picker" />
 
-            <ImageView
-                android:id="@+id/imageDetailDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_baseline_calendar_month_24" />
-        </LinearLayout>
+    <EditText
+        android:id="@+id/edit_text_transaction_detail_sum"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/editDetailSum"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_transaction_detail_currencies"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_transaction_detail_currencies"
+        app:layout_constraintStart_toStartOf="@+id/spinner_transaction_detail_type" />
 
-        <EditText
-            android:id="@+id/editDetailSum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="15dp"
-            android:ems="10"
-            android:hint="@string/editDetailSum"
-            android:inputType="numberDecimal"
-            android:textSize="20sp" />
-
-        <Spinner
-            android:id="@+id/spinnerDetailCurrencies"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="15dp"
-            android:entries="@array/transaction_currencies"
-            android:minHeight="48dp"
-            android:textSize="20sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonDetailUpdate"
-            style="@style/StyleButtonOK"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="15dp"
-            android:text="@string/buttonDetailUpdate" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonDetailDelete"
-            style="@style/StyleButtonOK"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/buttonDetailDelete" />
-
-    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_transaction_detail_save"
+        style="@style/StyleButtonOK"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/offset_16"
+        android:text="@string/save_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_transaction_detail_sum" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

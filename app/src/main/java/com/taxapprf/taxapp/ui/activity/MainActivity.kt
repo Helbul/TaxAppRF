@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.coroutineScope
+import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.navigateUp
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         viewModel.observeState()
         viewModel.observeAccounts()
         viewModel.observeAccount()
+        navController.observeCurrentBackStack()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -139,6 +141,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private fun MainViewModel.observeAccount() {
         account.observe(this@MainActivity) {
             drawer.account.text = it.name
+            fabVisibilityManager()
         }
     }
 
@@ -153,17 +156,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
     }
 
-    private fun fabVisibilityManager() {
+    private fun NavController.observeCurrentBackStack() {
         lifecycle.coroutineScope.launch {
-            navController.currentBackStack.collectLatest { navBackStackEntries ->
-                viewModel.account.value?.let {
-                    if (fabVisibleDestinations.contains(navBackStackEntries.last().destination.id))
-                        binding.appBarMain.fab.show()
-                    else
-                        binding.appBarMain.fab.hide()
-                }
+            currentBackStack.collectLatest {
+                fabVisibilityManager()
             }
         }
+    }
+
+    private fun fabVisibilityManager() {
+        val currentDestination = navController.currentBackStack.value.last().destination.id
+        if (fabVisibleDestinations.contains(currentDestination)) binding.appBarMain.fab.show()
+        else binding.appBarMain.fab.hide()
     }
 
     private fun navToAccountAdd() {
