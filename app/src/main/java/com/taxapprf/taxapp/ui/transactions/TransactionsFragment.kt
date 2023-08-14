@@ -35,7 +35,10 @@ class TransactionsFragment : BaseFragment(R.layout.fragment_transactions) {
         toolbar.updateMenu(R.menu.transactions_toolbar) {
             when (it.itemId) {
                 R.id.toolbar_share_excel -> {
-                    viewModel.share()
+                    if (requireActivity().checkStoragePermission()) {
+                        viewModel.sendExcelReport()
+                    }
+
                     true
                 }
 
@@ -60,13 +63,8 @@ class TransactionsFragment : BaseFragment(R.layout.fragment_transactions) {
             findNavController().navigate(R.id.action_transactions_to_transaction_detail)
         }
 
-        binding.buttonTransSendEmail.setOnClickListener {
-            if (requireActivity().checkStoragePermission()) {
-                viewModel.sendExcelReport()
-            }
-        }
 
-        binding.buttonTransDeleteYear.setOnClickListener { navToTransactionDelete() }
+//        binding.buttonTransDeleteYear.setOnClickListener { navToTransactionDelete() }
 
         viewModel.attachToBaseFragment()
         currentStackSavedState.observeDelete()

@@ -1,135 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    android:id="@+id/transactions_adapter_item"
+    android:layout_marginHorizontal="@dimen/offset_8"
+    android:layout_marginTop="@dimen/offset_8">
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="@dimen/offset_8">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="vertical">
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="DD/MM/YYYY" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_name"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/offset_16"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:lines="1"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_view_transactions_adapter_item_date"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="name" />
 
-                <TextView
-                    android:id="@+id/textTransItemDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:paddingEnd="5dp"
-                    android:text="DD/MM/YYYY"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textStyle="bold" />
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+            app:layout_constraintStart_toStartOf="@+id/text_view_transactions_adapter_item_date"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_transactions_adapter_item_date"
+            tools:text="type" />
 
-                <TextView
-                    android:id="@+id/textTransItemId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="id transaction"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/offset_8"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_transactions_adapter_item_currency"
+            app:layout_constraintTop_toTopOf="@+id/text_view_transactions_adapter_item_currency"
+            tools:text="sum.00" />
 
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_transactions_adapter_item_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_transactions_adapter_item_type"
+            tools:text="CUR" />
 
-            </LinearLayout>
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_rate_cbr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/offset_8"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            app:layout_constraintStart_toEndOf="@+id/text_view_transactions_adapter_item_cbr_title"
+            app:layout_constraintTop_toTopOf="@+id/text_view_transactions_adapter_item_cbr_title"
+            tools:text="cb.00" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/offset_8"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_transactions_adapter_item_sum"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_transactions_adapter_item_sum"
+            tools:text="1000.34" />
 
-                <TextView
-                    android:id="@+id/textTransItemType"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:gravity="left"
-                    android:text="type" />
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_cbr_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/textCB"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/textTransItemSum"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="sum.00"
-                    android:textStyle="italic" />
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_tax_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/offset_8"
+            android:text="@string/symbol_rub"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_view_transactions_adapter_item_tax" />
 
-                <TextView
-                    android:id="@+id/textTransItemCurrency"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="CUR" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/text_trans1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="@string/textCB" />
-
-                <TextView
-                    android:id="@+id/textTransItemCB"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="cb.00"
-                    android:textStyle="italic" />
-
-                <TextView
-                    android:id="@+id/text_trans2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="@string/textSumRub"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-                <TextView
-                    android:id="@+id/textTransItemSumRub"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="sumRub.00"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textStyle="bold|italic" />
-            </LinearLayout>
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

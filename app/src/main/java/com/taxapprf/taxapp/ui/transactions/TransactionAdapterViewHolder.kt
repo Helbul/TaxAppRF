@@ -19,12 +19,12 @@ class TransactionAdapterViewHolder(
     fun bind(transactionModel: TransactionModel) {
         transaction = transactionModel
 
-        binding.textTransItemId.text = transaction.name
-        binding.textTransItemType.text = transaction.type
-        binding.textTransItemDate.text = transaction.date
-        binding.textTransItemSum.text = transaction.sum.toString()
-        binding.textTransItemCurrency.text = transaction.currency
-        binding.textTransItemCB.text = transaction.rateCBR.toString()
-        binding.textTransItemSumRub.text = transaction.tax.toString()
+        binding.textViewTransactionsAdapterItemName.text = transaction.name
+        binding.textViewTransactionsAdapterItemType.text = transaction.type
+        binding.textViewTransactionsAdapterItemDate.text = transaction.date
+        binding.textViewTransactionsAdapterItemSum.text = transaction.sum.toString()
+        binding.textViewTransactionsAdapterItemCurrency.text = transaction.currency
+        binding.textViewTransactionsAdapterItemRateCbr.text = transaction.rateCBR.toString()
+        binding.textViewTransactionsAdapterItemTax.text = transaction.tax.toString()
     }
 }
