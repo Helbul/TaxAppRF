@@ -49,10 +49,10 @@
     <string name="error_sign_in">Неверные параметры входа! Повторите попытку.</string>
 
     <!--SelectAccountFragment-->
-    <string name="buttonSelectOpen">Открыть</string>
-    <string name="buttonSelectCreate">Создать</string>
-    <string name="buttonSelectExit">Выйти</string>
-    <string name="textSelectUnderBottom">Выберете существующий или создайте новый счет</string>
+    <string name="button_select_open">Открыть</string>
+    <string name="button_select_create">Создать</string>
+    <string name="button_select_exit">Выйти</string>
+    <string name="text_select_under_bottom">Выберете существующий или создайте новый счет</string>
     <string name="account_select_accounts_loading">Идет загрузка доступных счетов. Пожалуйста, подождите.</string>
 
     <!--NewAccountFragment-->

@@ -8,16 +8,8 @@
     tools:context=".ui.account.select.AccountSelectFragment">
 
     <TextView
-        android:id="@+id/textViewSelect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/suez_one"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textSize="45sp"
-        android:textStyle="bold"
+        android:id="@+id/logo"
+        style="@style/StyleLogoText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,59 +24,63 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinnerSelectAccount"
+<!--        <androidx.appcompat.widget.AppCompatSpinner-->
+<!--            android:id="@+id/spinnerSelectAccount"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:minWidth="200dp"-->
+<!--            android:minHeight="48dp" />-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:minWidth="200dp"
-            android:minHeight="48dp" />
+            android:layout_marginBottom="@dimen/sign_margin_vertical">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonSelectOpen"
+            <AutoCompleteTextView
+                android:id="@+id/spinner_select_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="none"
+                android:text="Грузится..." />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_select_open"
             style="@style/StyleButtonOK"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/buttonSelectOpen" />
+            android:layout_marginBottom="@dimen/sign_margin_vertical"
+            android:text="@string/button_select_open" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonSelectNewAccountCreate"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_select_new_account_create"
             style="@style/StyleButtonOK"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/buttonSelectCreate" />
+            android:layout_marginBottom="@dimen/sign_margin_vertical"
+            android:text="@string/button_select_create" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonSelectExit"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_select_exit"
             style="@style/StyleButtonCancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/buttonSelectExit" />
+            android:layout_marginBottom="@dimen/sign_margin_vertical"
+            android:text="@string/button_select_exit" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textSelectUnderBottom"
+        android:id="@+id/text_select_under_bottom"
         android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        android:layout_margin="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/sign_margin_vertical"
         android:gravity="center"
-        android:text="@string/textSelectUnderBottom"
-        android:textSize="16sp"
+        android:text="@string/text_select_under_bottom"
+        android:textSize="@dimen/sign_in_text_under_bottom_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
