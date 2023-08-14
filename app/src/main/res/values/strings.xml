@@ -18,6 +18,12 @@
     <string name="response_error_data_is_empty"></string>
 
 
+    <string-array name="symbols">
+        <item name="rub">@string/symbol_rub</item>
+    </string-array>
+
+    <string name="symbol_rub">₽</string>
+
     <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
     <!--Menu-->

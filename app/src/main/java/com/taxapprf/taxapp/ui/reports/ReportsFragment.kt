@@ -30,7 +30,7 @@ class ReportsFragment : BaseFragment(R.layout.fragment_reports) {
         toolbar.updateToolbar(getString(R.string.taxes_name))
 
         fab.setOnClickListener { navToTransactionDetail() }
-        binding.buttonTaxesLoading.setOnClickListener { navToSystemStorage() }
+//        binding.buttonTaxesLoading.setOnClickListener { navToSystemStorage() }
         binding.recyclerYearStatements.adapter = adapter
 
         viewModel.attachToBaseFragment()

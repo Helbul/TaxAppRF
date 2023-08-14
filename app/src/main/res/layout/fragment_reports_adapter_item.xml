@@ -8,11 +8,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        app:cardElevation="4dp"
+        android:layout_marginHorizontal="@dimen/offset_8"
+        android:layout_marginTop="@dimen/offset_8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,37 +18,35 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:minHeight="@dimen/item_size"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/offset_16">
 
             <TextView
                 android:id="@+id/textViewYear"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="2"
-                android:gravity="center_horizontal"
-                android:text="year"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:layout_width="@dimen/zero"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                tools:text="year" />
 
             <TextView
                 android:id="@+id/textViewYearSum"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1.5"
-                android:gravity="center_horizontal"
-                android:text="sumYear"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/offset_16"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                tools:text="sumYear" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="0dp"
-                android:layout_height="18sp"
-                android:layout_gravity="center"
-                android:layout_weight="0.5"
-                app:srcCompat="@drawable/ic_baseline_currency_ruble_24" />
+            <TextView
+                android:id="@+id/textViewTaxSymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/symbol_rub"
+                android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
