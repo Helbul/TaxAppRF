@@ -15,28 +15,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayoutNewAccount"
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linearLayoutNewAccount"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/sign_margin_side"-->
+<!--        android:layout_marginEnd="@dimen/sign_margin_side"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/logo"-->
+<!--        app:layout_constraintVertical_bias="0.37">-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/editNewAccountName"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="@string/editNewAccount"-->
+<!--            android:inputType="text"-->
+<!--            android:textSize="20sp" />-->
+
+<!--    </LinearLayout>-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_new_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/sign_margin_side"
+        android:layout_marginEnd="@dimen/sign_margin_side"
+        android:layout_marginBottom="@dimen/sign_margin_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        app:layout_constraintVertical_bias="0.37">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        >
 
-        <EditText
-            android:id="@+id/editNewAccountName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/editNewAccount"
-            android:inputType="text"
-            android:textSize="20sp" />
-
-    </LinearLayout>
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit_new_account_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/edit_new_account"
+        android:inputType="text"
+        android:textSize="@dimen/text_size_16sp"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,9 +68,9 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutNewAccount">
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout_new_account">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonNewAccountCreate"
             style="@style/StyleButtonOK"
             android:layout_width="match_parent"
@@ -56,10 +80,10 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
-            android:text="@string/buttonNewAccountOk"
+            android:text="@string/button_new_account_ok"
             android:textSize="14sp" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonNewAccountCancel"
             style="@style/StyleButtonCancel"
             android:layout_width="match_parent"
@@ -69,7 +93,7 @@
             android:layout_marginEnd="60dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
-            android:text="@string/buttonNewAccountCancel" />
+            android:text="@string/button_new_account_cancel" />
     </LinearLayout>
 
     <TextView
@@ -79,7 +103,7 @@
         android:layout_margin="20dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:text="@string/textNewAccountUnderBottom"
+        android:text="@string/text_new_account_under_bottom"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

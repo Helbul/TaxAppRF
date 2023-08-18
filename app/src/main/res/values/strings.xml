@@ -62,10 +62,10 @@
     <string name="account_select_accounts_loading">Идет загрузка доступных счетов. Пожалуйста, подождите.</string>
 
     <!--NewAccountFragment-->
-    <string name="editNewAccount">№ счета</string>
-    <string name="buttonNewAccountOk">Создать</string>
-    <string name="buttonNewAccountCancel">Отменить</string>
-    <string name="textNewAccountUnderBottom">Введите имя нового счета</string>
+    <string name="edit_new_account">№ счета</string>
+    <string name="button_new_account_ok">Создать</string>
+    <string name="button_new_account_cancel">Отменить</string>
+    <string name="text_new_account_under_bottom">Введите имя нового счета</string>
 
     <!--Registration Fragment-->
     <string name="edit_sign_up_name">Имя</string>
@@ -125,12 +125,12 @@
 
 
     <!-- TransactionDetailFragment-->
-    <string name="editDetailId"> Сделка</string>
-    <string name="editDetailDate">Дата сделки ДД/ММ/ГГГГ</string>
-    <string name="editDetailSum">Сумма</string>
-    <string name="buttonDetailUpdate">Обновить</string>
-    <string name="buttonDetailDelete">Удалить</string>
-    <string name="buttonDetailCancel">Отменить</string>
+    <string name="edit_detail_id"> Сделка</string>
+    <string name="edit_detail_date">Дата сделки ДД/ММ/ГГГГ</string>
+    <string name="edit_detail_sum">Сумма</string>
+    <string name="button_detail_update">Обновить</string>
+    <string name="button_detail_delete">Удалить</string>
+    <string name="button_detail_cancel">Отменить</string>
     <string name="transaction_detail_delete_success">Сделка удалена</string>
     <string name="transaction_detail_save_success">Сделка обновлена</string>
     <string name="transaction_detail_add_error_load_rate">Не удалось загрузить курс валюты. Сделка не добавлена!</string>
