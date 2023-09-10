@@ -150,26 +150,28 @@ class TransactionsFragment : BaseFragment(R.layout.fragment_transactions) {
         }
 
         override fun onClickMore(transactionModel: TransactionModel) {
-            showActionMode {
-                object : BaseActionModeCallback {
-                    override var menuInflater = requireActivity().menuInflater
-                    override var menuId = R.menu.transaction_action_menu
-
-                    override fun onActionItemClicked(
-                        mode: ActionMode?,
-                        item: MenuItem
-                    ) = when (item.itemId) {
-                        R.id.action_menu_delete -> {
-                            viewModel.deleteTransaction = transactionModel
-                            actionMode?.finish()
-                            navToTransactionDelete()
-                            true
-                        }
-
-                        else -> false
-                    }
-                }
-            }
+            viewModel.deleteTransaction = transactionModel
+            navToTransactionDelete()
+//            showActionMode {
+//                object : BaseActionModeCallback {
+//                    override var menuInflater = requireActivity().menuInflater
+//                    override var menuId = R.menu.transaction_action_menu
+//
+//                    override fun onActionItemClicked(
+//                        mode: ActionMode?,
+//                        item: MenuItem
+//                    ) = when (item.itemId) {
+//                        R.id.action_menu_delete -> {
+//                            viewModel.deleteTransaction = transactionModel
+//                            actionMode?.finish()
+//                            navToTransactionDelete()
+//                            true
+//                        }
+//
+//                        else -> false
+//                    }
+//                }
+//            }
         }
 
         override fun onSwiped(position: Int) {

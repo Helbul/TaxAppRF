@@ -87,27 +87,29 @@ class ReportsFragment : BaseFragment(R.layout.fragment_reports) {
                 navToTransactions(reportModel)
             }
 
-            override fun onClickMore(reportModel: ReportModel) {
-                showActionMode {
-                    object : BaseActionModeCallback {
-                        override var menuInflater = requireActivity().menuInflater
-                        override var menuId = R.menu.report_action_menu
-
-                        override fun onActionItemClicked(
-                            mode: ActionMode?,
-                            item: MenuItem
-                        ) = when (item.itemId) {
-                            R.id.action_menu_delete -> {
-                                viewModel.deleteReport = reportModel
-                                actionMode?.finish()
-                                navToDeleteDialog()
-                                true
-                            }
-
-                            else -> false
-                        }
-                    }
-                }
+            override fun onClickDelete(reportModel: ReportModel) {
+                viewModel.deleteReport = reportModel
+                navToDeleteDialog()
+//                showActionMode {
+//                    object : BaseActionModeCallback {
+//                        override var menuInflater = requireActivity().menuInflater
+//                        override var menuId = R.menu.report_action_menu
+//
+//                        override fun onActionItemClicked(
+//                            mode: ActionMode?,
+//                            item: MenuItem
+//                        ) = when (item.itemId) {
+//                            R.id.action_menu_delete -> {
+//                                viewModel.deleteReport = reportModel
+//                                actionMode?.finish()
+//                                navToDeleteDialog()
+//                                true
+//                            }
+//
+//                            else -> false
+//                        }
+//                    }
+//                }
             }
 
             override fun onSwiped(position: Int) {

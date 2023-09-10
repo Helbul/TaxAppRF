@@ -14,5 +14,6 @@ open class BottomSheetBaseFragment(layoutId: Int) : BottomSheetDialogFragment(la
     override val fragment
         get() = this
     override lateinit var baseViewModel: BaseViewModel
-    override var actionMode: ActionMode? = null
+
+    //override var actionMode: ActionMode? = null
 }

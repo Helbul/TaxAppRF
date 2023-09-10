@@ -18,11 +18,11 @@
             android:layout_width="@dimen/zero"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/offset_24"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
+            android:gravity="center_horizontal"
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/text_reports_adapter_item_tax"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="2000" />
 
@@ -35,7 +35,8 @@
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             app:layout_constraintEnd_toStartOf="@+id/button_reports_adapter_item_more"
             app:layout_constraintStart_toEndOf="@+id/text_reports_adapter_item_year"
-            app:layout_constraintTop_toTopOf="@+id/text_reports_adapter_item_year"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:text="1000.00" />
 
         <TextView
@@ -54,9 +55,11 @@
             style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:icon="@drawable/baseline_more_horiz_24"
+            app:icon="@drawable/ic_baseline_delete_24"
+            app:layout_constraintStart_toEndOf="@+id/text_reports_adapter_item_symbol"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

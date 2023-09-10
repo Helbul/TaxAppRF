@@ -22,7 +22,7 @@ interface BaseFragmentInterface {
     val mainViewModel: MainViewModel
     val fragment: Fragment
     var baseViewModel: BaseViewModel
-    var actionMode: ActionMode?
+    //var actionMode: ActionMode?
 
 
     fun BaseViewModel.attach() {
@@ -32,7 +32,7 @@ interface BaseFragmentInterface {
         fragment.lifecycle.addObserver(object : LifecycleEventObserver {
             override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
                 if (event == Lifecycle.Event.ON_PAUSE) {
-                    hideActionMode()
+                    //hideActionMode()
                     fragment.lifecycle.removeObserver(this)
                 }
             }
@@ -99,16 +99,16 @@ interface BaseFragmentInterface {
         mainActivity.onLoadingSuccess()
     }
 
-    fun showActionMode(callback: () -> BaseActionModeCallback) {
-        actionMode = mainActivity.startSupportActionMode(callback.invoke())
-    }
-
-    fun hideActionMode() {
-        actionMode?.let {
-            it.finish()
-            actionMode = null
-        }
-    }
+//    fun showActionMode(callback: () -> BaseActionModeCallback) {
+//        actionMode = mainActivity.startSupportActionMode(callback.invoke())
+//    }
+//
+//    fun hideActionMode() {
+//        actionMode?.let {
+//            it.finish()
+//            actionMode = null
+//        }
+//    }
 
     fun Int?.updateEditError(edit: TextInputEditText): Boolean {
         this?.let {

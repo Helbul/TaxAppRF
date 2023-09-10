@@ -9,70 +9,85 @@
     android:foregroundGravity="center_horizontal"
     tools:context=".ui.currency.converter.CurrencyConverterFragment">
 
-    <EditText
-        android:id="@+id/edit_currency_converter_sum"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_layout_currency_converter_sum"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="@dimen/offset_24"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/layout_spinner_currency_converter_sum"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_currency_converter_sum"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:inputType="numberDecimal"
+            android:text="@string/currency_converter_sum_default"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_spinner_currency_converter_sum"
         android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/offset_24"
-        android:ems="10"
         android:gravity="center_horizontal"
-        android:hint="@string/currency_converter_sum_hint"
-        android:inputType="numberDecimal"
-        android:text="@string/currency_converter_sum_default"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_currency_converter_sum"
-        app:layout_constraintEnd_toEndOf="@+id/button_currency_converter_convert"
-        app:layout_constraintStart_toStartOf="@+id/button_currency_converter_convert"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <Spinner
-        android:id="@+id/spinner_currency_converter_sum"
-        android:layout_width="@dimen/zero"
-        android:layout_height="@dimen/item_size"
-        android:layout_marginBottom="@dimen/offset_24"
-        android:foregroundGravity="center_horizontal"
-        android:spinnerMode="dropdown"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         app:layout_constraintBottom_toTopOf="@+id/button_currency_converter_convert"
-        app:layout_constraintEnd_toEndOf="@+id/button_currency_converter_convert"
-        app:layout_constraintStart_toStartOf="@+id/button_currency_converter_convert"
-        app:layout_constraintTop_toBottomOf="@+id/edit_currency_converter_sum" />
+        app:layout_constraintEnd_toEndOf="@+id/text_layout_currency_converter_sum"
+        app:layout_constraintStart_toStartOf="@+id/text_layout_currency_converter_sum"
+        app:layout_constraintTop_toBottomOf="@+id/text_layout_currency_converter_sum" >
+
+        <AutoCompleteTextView
+            android:id="@+id/spinner_currency_converter_sum"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:inputType="none"
+            android:text="@string/transaction_currency_usd"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/button_currency_converter_convert"
-        android:layout_width="@dimen/zero"
-        android:layout_height="@dimen/item_size"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginHorizontal="@dimen/currency_converter_horizontal_offset"
         android:layout_marginBottom="@dimen/offset_24"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        app:layout_constraintBottom_toTopOf="@+id/edit_currency_converter_sum_rub"
+        android:background="@drawable/rounded_shape"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_layout_currency_converter_sum_rub"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_currency_converter_sum"
-        app:srcCompat="@drawable/ic_baseline_wifi_protected_setup_24" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_spinner_currency_converter_sum"
+        app:srcCompat="@drawable/round_cached_24" />
 
-    <EditText
-        android:id="@+id/edit_currency_converter_sum_rub"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_layout_currency_converter_sum_rub"
         android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/offset_24"
         android:gravity="center_horizontal"
-        android:hint="@string/currency_converter_sum_hint"
-        android:inputType="numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/text_currency_converter_sum_rub_title"
-        app:layout_constraintEnd_toEndOf="@+id/button_currency_converter_convert"
-        app:layout_constraintStart_toStartOf="@+id/button_currency_converter_convert"
-        app:layout_constraintTop_toBottomOf="@+id/button_currency_converter_convert" />
-
-    <TextView
-        android:id="@+id/text_currency_converter_sum_rub_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/currency_converter_sum_rub"
-        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        app:startIconDrawable="@drawable/ic_baseline_currency_ruble_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button_currency_converter_convert"
-        app:layout_constraintStart_toStartOf="@+id/button_currency_converter_convert"
-        app:layout_constraintTop_toBottomOf="@+id/edit_currency_converter_sum_rub" />
+        app:layout_constraintEnd_toEndOf="@+id/layout_spinner_currency_converter_sum"
+        app:layout_constraintStart_toStartOf="@+id/text_layout_currency_converter_sum"
+        app:layout_constraintTop_toBottomOf="@+id/button_currency_converter_convert">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_currency_converter_sum_rub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:inputType="numberDecimal"
+            android:text="@string/currency_converter_sum_default" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

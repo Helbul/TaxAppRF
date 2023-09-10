@@ -41,6 +41,6 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
     }
 
     private fun navToReports() {
-        findNavController().navigate(R.id.action_global_reports)
+        findNavController().navigate(R.id.action_sign_in_to_reports)
     }
 }

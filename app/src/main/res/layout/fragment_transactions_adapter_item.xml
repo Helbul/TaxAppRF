@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/transactions_adapter_item"
@@ -13,25 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/offset_8">
-
-        <TextView
-            android:id="@+id/text_view_transactions_adapter_item_tax_symbol"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/offset_16"
-            android:text="@string/symbol_rub"
-            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-            app:layout_constraintBottom_toBottomOf="@+id/text_view_transactions_adapter_item_rate_cbr"
-            app:layout_constraintEnd_toStartOf="@+id/button_transactions_adapter_item_more" />
-
-        <TextView
-            android:id="@+id/text_view_transactions_adapter_item_tax_symbol2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/symbol_rub"
-            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-            app:layout_constraintBottom_toBottomOf="@+id/text_view_transactions_adapter_item_tax"
-            app:layout_constraintStart_toStartOf="@+id/text_view_transactions_adapter_item_currency" />
 
         <TextView
             android:id="@+id/text_view_transactions_adapter_item_date"
@@ -50,8 +31,8 @@
             android:lines="1"
             android:textAppearance="@style/TextAppearance.Material3.BodySmall"
             app:layout_constraintEnd_toStartOf="@+id/button_transactions_adapter_item_more"
-            app:layout_constraintStart_toStartOf="@+id/text_view_transactions_adapter_item_date"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_transactions_adapter_item_type"
+            app:layout_constraintStart_toEndOf="@+id/text_view_transactions_adapter_item_date"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_transactions_adapter_item_date"
             tools:text="name" />
 
         <TextView
@@ -84,24 +65,6 @@
             app:layout_constraintTop_toTopOf="@+id/text_view_transactions_adapter_item_sum"
             tools:text="CUR" />
 
-        <TextView
-            android:id="@+id/text_view_transactions_adapter_item_rate_cbr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/offset_4"
-            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-            app:layout_constraintEnd_toStartOf="@+id/text_view_transactions_adapter_item_tax_symbol"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="95.44" />
-
-        <TextView
-            android:id="@+id/text_view_transactions_adapter_item_tax"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-            app:layout_constraintEnd_toEndOf="@+id/text_view_transactions_adapter_item_sum"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_transactions_adapter_item_sum"
-            tools:text="1000.34" />
 
         <TextView
             android:id="@+id/text_view_transactions_adapter_item_cbr_title"
@@ -110,15 +73,54 @@
             android:layout_marginEnd="@dimen/offset_4"
             android:text="@string/textCB"
             android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-            app:layout_constraintBottom_toBottomOf="@+id/text_view_transactions_adapter_item_rate_cbr"
-            app:layout_constraintEnd_toStartOf="@+id/text_view_transactions_adapter_item_rate_cbr" />
+            app:layout_constraintTop_toBottomOf="@+id/text_view_transactions_adapter_item_type"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_rate_cbr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/offset_4"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            app:layout_constraintStart_toEndOf="@+id/text_view_transactions_adapter_item_cbr_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="95.44" />
+
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_tax_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/offset_16"
+            android:text="@string/symbol_rub"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_view_transactions_adapter_item_rate_cbr" />
+
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_tax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_transactions_adapter_item_tax_symbol2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="1000.34" />
+
+        <TextView
+            android:id="@+id/text_view_transactions_adapter_item_tax_symbol2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/symbol_rub"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/button_transactions_adapter_item_more"
             style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:icon="@drawable/baseline_more_horiz_24"
+            app:icon="@drawable/ic_baseline_delete_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

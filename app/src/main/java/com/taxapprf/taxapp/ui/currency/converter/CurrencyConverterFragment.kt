@@ -1,10 +1,12 @@
 package com.taxapprf.taxapp.ui.currency.converter
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.View.OnFocusChangeListener
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.taxapprf.taxapp.R
@@ -61,32 +63,50 @@ class CurrencyConverterFragment : BaseFragment(R.layout.fragment_currency_conver
                 }
             }
 
-        binding.spinnerCurrencyConverterSum.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                currenciesAdapter.getItem(position)?.let {
-                    viewModel.currency = it
+//        binding.spinnerCurrencyConverterSum.onItemSelectedListener = object :
+//            AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//
+//                Log.d("OLGA", "onItemSelected currenciesAdapter.getItem(position): ${currenciesAdapter.getItem(position)}")
+//                currenciesAdapter.getItem(position)?.let {
+//                    viewModel.currency = it
+//                }
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {}
+//        }
+
+        binding.spinnerCurrencyConverterSum.onItemClickListener =
+            AdapterView.OnItemClickListener {
+                    adapterView, view, position, id ->
+
+                Log.d("OLGA", "onItemSelected currenciesAdapter.getItem(position): ${adapterView.getItemAtPosition(position)}")
+                adapterView.getItemAtPosition(position)?.let {
+                    viewModel.currency = adapterView.getItemAtPosition(position).toString()
                 }
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
     }
+
 
     private fun prepCurrencies() {
         val currencies = resources.getStringArray(R.array.transaction_currencies)
         currenciesAdapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, currencies)
-        currenciesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerCurrencyConverterSum.adapter = currenciesAdapter
-        binding.spinnerCurrencyConverterSum.setSelection(
-            currencies.indexOf(resources.getString(R.string.transaction_currency_usd))
-        )
+        //currenciesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        currenciesAdapter = ArrayAdapter(requireContext(), R.layout.list_item, currencies)
+        (binding.spinnerCurrencyConverterSum as? AutoCompleteTextView)?.setAdapter(currenciesAdapter)
+
+        //binding.spinnerCurrencyConverterSum.adapter = currenciesAdapter
+
+//        binding.spinnerCurrencyConverterSum.setSelection(
+//            currencies.indexOf(resources.getString(R.string.transaction_currency_usd))
+//        )
     }
 
     override fun onLoadingRetry() {

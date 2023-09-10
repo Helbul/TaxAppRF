@@ -16,7 +16,7 @@ class ReportsAdapterViewHolder(
         }
 
         binding.buttonReportsAdapterItemMore.setOnClickListener {
-            callback.onClickMore(report)
+            callback.onClickDelete(report)
         }
     }
 

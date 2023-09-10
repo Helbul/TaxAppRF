@@ -2,10 +2,12 @@ package com.taxapprf.taxapp.ui.transactions.detail
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -59,12 +61,16 @@ class TransactionDetailFragment : BottomSheetBaseFragment(R.layout.fragment_tran
 
     private fun prepTypes() {
         val types = resources.getStringArray(R.array.transaction_types)
-        typeAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerTransactionDetailType.adapter = typeAdapter
-        binding.spinnerTransactionDetailType.setSelection(
-            types.indexOf(resources.getString(R.string.transaction_type_trade))
-        )
+//        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        typeAdapter = ArrayAdapter(requireContext(), R.layout.list_item, types)
+        (binding.spinnerTransactionDetailType as? AutoCompleteTextView)?.setAdapter(typeAdapter)
+
+
+//        binding.spinnerTransactionDetailType.adapter = typeAdapter
+//        binding.spinnerTransactionDetailType.setSelection(
+//            types.indexOf(resources.getString(R.string.transaction_type_trade))
+//        )
     }
 
     private fun prepListeners() {
@@ -162,6 +168,9 @@ class TransactionDetailFragment : BottomSheetBaseFragment(R.layout.fragment_tran
     }
 
     private fun updateType(type: String) {
+//        binding.spinnerTransactionDetailType.setSelection(typeAdapter.getPosition(type))
+        Log.d("OLGA", "type STRING: $type")
+        Log.d("OLGA", "typeAdapter.getPosition(type) INT: ${typeAdapter.getPosition(type)}")
         binding.spinnerTransactionDetailType.setSelection(typeAdapter.getPosition(type))
     }
 

@@ -129,7 +129,7 @@
 
 
     <!-- TransactionDetailFragment-->
-    <string name="edit_detail_id"> Сделка</string>
+    <string name="edit_detail_id">Наименование операции</string>
     <string name="edit_detail_date">Дата сделки ДД/ММ/ГГГГ</string>
     <string name="edit_detail_sum">Сумма</string>
     <string name="transaction_detail_delete_success">Сделка удалена</string>

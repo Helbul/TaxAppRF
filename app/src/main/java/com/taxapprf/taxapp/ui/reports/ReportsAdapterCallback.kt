@@ -4,6 +4,6 @@ import com.taxapprf.domain.report.ReportModel
 
 interface ReportsAdapterCallback {
     fun onClick(reportModel: ReportModel)
-    fun onClickMore(reportModel: ReportModel)
+    fun onClickDelete(reportModel: ReportModel)
     fun onSwiped(position: Int)
 }

@@ -45,7 +45,11 @@
     <fragment
         android:id="@+id/sign_in"
         android:name="com.taxapprf.taxapp.ui.sign.in.SignInFragment"
-        tools:layout="@layout/fragment_sign_in" />
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_sign_in_to_reports"
+            app:destination="@id/reports" />
+    </fragment>
 
     <fragment
         android:id="@+id/sign_up"
