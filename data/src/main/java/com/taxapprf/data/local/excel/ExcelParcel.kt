@@ -36,33 +36,37 @@ class ExcelParcel(private val saveExcelToFirebaseModel: SaveTransactionsFromExce
         val sheet: Sheet = workBook.getSheetAt(0)
         val rowIterator: Iterator<Row> = sheet.iterator()
 
-        try {
-            rowIterator.next()
-            rowIterator.next()
-            rowIterator.next()
 
             while (rowIterator.hasNext()) {
                 val row = rowIterator.next()
-                val date = row.getCell(2).parseDate()
 
-                val transaction = SaveTransactionModel(
-                    accountKey = saveExcelToFirebaseModel.accountKey,
-                    yearKey = date.split("/")[2],
-                    date = date,
-                    name = row.getCell(0).stringCellValue,
-                    currency = row.getCell(4).stringCellValue,
-                    type = row.getCell(1).stringCellValue,
-                    sum = row.getCell(3).numericCellValue,
-                ).apply {
-                    rateCBR = row.getCell(5).numericCellValue
-                    tax = row.getCell(6).numericCellValue
+                try {
+                    val name = row.getCell(0).stringCellValue
+                    val type = row.getCell(1).stringCellValue
+                    val date = row.getCell(2).parseDate()
+                    val sum = row.getCell(3).numericCellValue
+                    val currency = row.getCell(4).stringCellValue
+
+                    val transaction = SaveTransactionModel(
+                        accountKey = saveExcelToFirebaseModel.accountKey,
+                        yearKey = date.split("/")[2],
+                        transactionKey = null,
+                        date,
+                        name,
+                        currency,
+                        type,
+                        sum
+                    )
+//                    .apply {
+//                        rateCBR = row.getCell(5).numericCellValue
+//                        tax = row.getCell(6).numericCellValue
+//                    }
+                    transactions.add(transaction)
+
+                } catch (_: Exception) {
+                    //TODO() первые три строчки пропуск
                 }
-                transactions.add(transaction)
             }
-
-        } catch (_: Exception) {
-            //TODO() первые три строчки пропуск
-        }
         return transactions
     }
 
