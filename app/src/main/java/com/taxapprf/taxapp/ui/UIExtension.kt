@@ -1,17 +1,12 @@
 package com.taxapprf.taxapp.ui
 
-import android.Manifest
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.pm.PackageManager
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
-import com.taxapprf.domain.PATTERN_DATE
+import com.taxapprf.data.toLocalDate
 import com.taxapprf.taxapp.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -25,10 +20,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import java.text.DecimalFormat
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.format.ResolverStyle
 import java.util.Calendar
-import java.util.Locale
 import java.util.regex.Pattern
 
 val state: MutableSharedFlow<BaseState> = MutableSharedFlow()
@@ -66,34 +58,6 @@ fun View.hideKeyboard() {
     imm.hideSoftInputFromWindow(windowToken, 0)
 }
 
-fun Activity.checkStoragePermission(): Boolean {
-    val permissionWrite = Manifest.permission.WRITE_EXTERNAL_STORAGE
-    val permissionRead = Manifest.permission.READ_EXTERNAL_STORAGE
-    return if (
-        ContextCompat.checkSelfPermission(
-            this,
-            permissionWrite
-        ) == PackageManager.PERMISSION_GRANTED
-    ) true
-    else {
-        ActivityCompat.requestPermissions(this, arrayOf(permissionRead, permissionWrite), 1)
-        false
-    }
-}
-
-fun String.toLocalDate() =
-    try {
-        LocalDate.parse(
-            this,
-            DateTimeFormatter
-                .ofPattern(PATTERN_DATE)
-                .withLocale(Locale.ROOT)
-                .withResolverStyle(ResolverStyle.STRICT)
-        )
-    } catch (e: Exception) {
-        null
-    }
-
 fun String.showDatePickerDialog(
     context: Context,
     listener: DatePickerDialog.OnDateSetListener
@@ -130,3 +94,6 @@ fun getEpochDay(year: Int, month: Int, dayOfMonth: Int) =
 
 val appDoubleFormatter = DecimalFormat("#,##0.00")
 fun Double.toAppDouble(): String = appDoubleFormatter.format(this)
+
+val editorDoubleFormatter = DecimalFormat("###.##")
+fun Double.toEditorDouble(): String = editorDoubleFormatter.format(this).replace(",", ".")

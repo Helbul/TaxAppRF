@@ -3,9 +3,10 @@ package com.taxapprf.taxapp.ui.transactions
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.taxapprf.data.local.room.LocalDatabase.Companion.REPORT_ID
+import com.taxapprf.domain.deleted.DeleteTransactionsModel
+import com.taxapprf.domain.deleted.DeleteTransactionsUseCase
 import com.taxapprf.domain.excel.ExportExcelModel
 import com.taxapprf.domain.excel.ExportExcelUseCase
-import com.taxapprf.domain.transactions.DeleteTransactionsUseCase
 import com.taxapprf.domain.transactions.ObserveReportUseCase
 import com.taxapprf.domain.transactions.ObserveTransactionsUseCase
 import com.taxapprf.domain.transactions.TransactionModel
@@ -40,25 +41,30 @@ class TransactionsViewModel @Inject constructor(
         }
 
     fun deleteTransaction(transactionModel: TransactionModel) =
-        viewModelScope.launch(Dispatchers.IO) {
-            val transactionsId = listOf(transactionModel.id)
-            deleteTransactionsUseCase.execute(transactionsId)
-        }
-
-    fun exportReport(transactionTypes: Map<Int, String>) =
         reportId?.let {
             viewModelScope.launch(Dispatchers.IO) {
-                val getExcelReportModel = ExportExcelModel(reportId, transactionTypes)
+                val deleteTransactionsModel = DeleteTransactionsModel(
+                    reportId = reportId,
+                    transactionIds = listOf(transactionModel.id)
+                )
+                deleteTransactionsUseCase.execute(deleteTransactionsModel)
+            }
+        }
+
+    fun exportReport() =
+        reportId?.let {
+            viewModelScope.launch(Dispatchers.IO) {
+                val getExcelReportModel = ExportExcelModel(reportId)
                 exportExcelUseCase.execute(getExcelReportModel)?.let {
                     successExport(it)
                 }
             }
         }
 
-    fun shareReport(transactionTypes: Map<Int, String>) {
+    fun shareReport() {
         reportId?.let {
             viewModelScope.launch(Dispatchers.IO) {
-                val getExcelReportModel = ExportExcelModel(reportId, transactionTypes)
+                val getExcelReportModel = ExportExcelModel(reportId)
                 exportExcelUseCase.execute(getExcelReportModel)?.let {
                     successShare(it)
                 }

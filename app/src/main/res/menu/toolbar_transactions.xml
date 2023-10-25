@@ -4,11 +4,11 @@
     <item
         android:id="@+id/toolbar_share_excel"
         android:icon="@drawable/ic_baseline_share_24"
-        android:title="@string/share_excel_name"
+        android:title="@string/share_excel"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/toolbar_export_excel"
         android:icon="@drawable/ic_baseline_upload_24"
-        android:title="@string/export_excel_name"
+        android:title="@string/export_excel"
         app:showAsAction="ifRoom" />
 </menu>

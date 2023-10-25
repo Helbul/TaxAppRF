@@ -19,7 +19,6 @@ import com.taxapprf.taxapp.R
 import com.taxapprf.taxapp.databinding.FragmentReportsBinding
 import com.taxapprf.taxapp.ui.BaseActionModeCallback
 import com.taxapprf.taxapp.ui.BaseFragment
-import com.taxapprf.taxapp.ui.checkStoragePermission
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -89,11 +88,11 @@ class ReportsFragment : BaseFragment(R.layout.fragment_reports) {
     }
 
     private fun prepToolbar() {
-        toolbar.updateTitles(getString(R.string.taxes_name))
+        toolbar.updateTitles(getString(R.string.menu_reports))
         toolbar.updateMenu(R.menu.toolbar_reports) {
             when (it.itemId) {
                 R.id.toolbar_import_excel -> {
-                    launchExportExcelToFirebaseIntent()
+                    launchImportExcelIntent()
                     true
                 }
 
@@ -149,19 +148,15 @@ class ReportsFragment : BaseFragment(R.layout.fragment_reports) {
             .show()
     }
 
-    private val exportExcelToFirebaseIntent =
+    private val importExcelRegisterForActivityResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            viewModel.saveReportsFromExcel(it.data)
+            viewModel.importExcel(it.data)
         }
 
-    private fun launchExportExcelToFirebaseIntent() {
-        with(requireActivity()) {
-            if (checkStoragePermission()) {
-                val intent = Intent(Intent.ACTION_GET_CONTENT)
-                intent.type = "application/vnd.ms-excel"
-                exportExcelToFirebaseIntent.launch(intent)
-            }
-        }
+    private fun launchImportExcelIntent() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "application/vnd.ms-excel"
+        importExcelRegisterForActivityResult.launch(intent)
     }
 
     private fun navToTransactions(reportModel: ReportModel) {

@@ -1,9 +1,9 @@
 package com.taxapprf.taxapp.ui.sign.`in`
 
 import androidx.lifecycle.viewModelScope
-import com.taxapprf.domain.sync.SyncAllUseCase
 import com.taxapprf.domain.main.user.SignInModel
 import com.taxapprf.domain.main.user.SignInUseCase
+import com.taxapprf.domain.sync.SyncAllUseCase
 import com.taxapprf.taxapp.R
 import com.taxapprf.taxapp.ui.BaseViewModel
 import com.taxapprf.taxapp.ui.isEmailIncorrect
@@ -39,13 +39,13 @@ class SignInViewModel @Inject constructor(
         }
 
     fun checkEmail(): Int? {
-        return if (email.isEmpty()) R.string.error_email_empty
-        else if (email.isEmailIncorrect()) R.string.error_email_incorrect
+        return if (email.isEmpty()) R.string.sign_error_email_empty
+        else if (email.isEmailIncorrect()) R.string.sign_error_email_incorrect
         else null
     }
 
     fun checkPassword(): Int? {
-        return if (password.isErrorPasswordRange()) R.string.error_password_length
+        return if (password.isErrorPasswordRange()) R.string.sign_error_password_length
         else null
     }
 }

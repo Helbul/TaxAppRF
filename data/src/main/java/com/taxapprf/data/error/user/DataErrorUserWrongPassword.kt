@@ -1,3 +1,5 @@
-package com.taxapprf.data.error
+package com.taxapprf.data.error.user
 
-class DataErrorUserWrongPassword : Throwable()
+import com.taxapprf.data.error.DataErrorUser
+
+class DataErrorUserWrongPassword(message: String? = null) : DataErrorUser(message)

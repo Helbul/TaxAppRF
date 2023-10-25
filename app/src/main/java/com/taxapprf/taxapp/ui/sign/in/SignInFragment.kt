@@ -23,7 +23,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_sign_in) {
         toolbar.updateMenu()
         updateUI()
 
-        binding.buttonSignInCreate.setOnClickListener { checkSignIn() }
+        binding.buttonSignIn.setOnClickListener { checkSignIn() }
     }
 
     override fun onSuccess() {

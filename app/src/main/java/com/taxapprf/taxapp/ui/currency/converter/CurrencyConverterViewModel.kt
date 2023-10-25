@@ -1,14 +1,16 @@
 package com.taxapprf.taxapp.ui.currency.converter
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import com.taxapprf.data.error.internal.currency.converter.DataErrorInternalCurrencyConverterCalculate
+import com.taxapprf.data.error.internal.currency.converter.DataErrorInternalCurrencyLoad
 import com.taxapprf.data.getEpochDate
-import com.taxapprf.domain.currency.CurrencyConverterModel
+import com.taxapprf.domain.currency.CurrencyRateModel
 import com.taxapprf.domain.currency.GetCurrencyRateModelsUseCase
 import com.taxapprf.taxapp.ui.BaseViewModel
+import com.taxapprf.taxapp.ui.showLoading
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 
@@ -16,50 +18,46 @@ import javax.inject.Inject
 class CurrencyConverterViewModel @Inject constructor(
     private val getCurrencyRateModelsUseCase: GetCurrencyRateModelsUseCase,
 ) : BaseViewModel() {
-    val converter = CurrencyConverterModel()
-
-    val sum = MutableLiveData<Double>()
-    val sumRub = MutableLiveData<Double>()
-
-    fun loading() = viewModelScope.launch(Dispatchers.IO) {
-        converter.currencies = getCurrencyRateModelsUseCase.execute(getEpochDate())
-
-        updateRate()
-        setSum(converter.sum)
-        success()
-    }
-
-    fun setSum(newSum: Double) {
-        converter.isModeSum = true
-        converter.sum = newSum
-        calculate()
-        sumRub.postValue(converter.sumRub)
-    }
-
-    fun setSumRub(newSum: Double) {
-        converter.isModeSum = false
-        converter.sumRub = newSum
-        calculate()
-        sum.postValue(converter.sum)
-    }
-
-    var currencyOrdinal: Int
-        get() = converter.currencyOrdinal
+    var currencyRates = emptyList<CurrencyRateModel>()
+    var sum = DEFAULT_SUM
+    var sumRUB = DEFAULT_SUM_RUB
+    var currencyOrdinal: Int = DEFAULT_CURRENCY_ORDINAL
         set(value) {
-            converter.currencyOrdinal = value
-            updateRate()
+            field = value
+            recalculateSumRUB()
         }
 
-    private fun updateRate() {
-        converter.currencyRate =
-            converter.currencies.find { it.currency.ordinal == currencyOrdinal }?.rate
-                ?: CurrencyConverterModel.DEFAULT_CURRENCY_RATE
+    fun recalculateSumRUB(textSum: String? = null) {
+        try {
+            textSum?.let { sum = it.toDouble() }
+            sumRUB = sum * currencyRates[currencyOrdinal].rate!!
+        } catch (e: Exception) {
+            error(DataErrorInternalCurrencyConverterCalculate())
+        }
     }
 
-    private fun calculate() {
-        with(converter) {
-            if (isModeSum) sumRub = (sum * currencyRate)
-            else sum = (sumRub / currencyRate)
+    fun recalculateSum(textSumRUB: String? = null) {
+        try {
+            textSumRUB?.let { sumRUB = it.toDouble() }
+            sum = sumRUB / currencyRates[currencyOrdinal].rate!!
+        } catch (e: Exception) {
+            error(DataErrorInternalCurrencyConverterCalculate())
         }
+    }
+
+    val updateCurrencyRates =
+        flow {
+            currencyRates = getCurrencyRateModelsUseCase.execute(getEpochDate())
+            if (currencyRates.isEmpty()) throw DataErrorInternalCurrencyLoad()
+            recalculateSumRUB()
+            emit(Unit)
+        }
+            .flowOn(Dispatchers.IO)
+            .showLoading()
+
+    companion object {
+        const val DEFAULT_SUM = 1.0
+        const val DEFAULT_CURRENCY_ORDINAL = 13
+        const val DEFAULT_SUM_RUB = 0.0
     }
 }

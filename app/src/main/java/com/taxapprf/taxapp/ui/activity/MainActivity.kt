@@ -23,8 +23,10 @@ import com.taxapprf.data.error.DataErrorExcel
 import com.taxapprf.data.error.DataErrorExternal
 import com.taxapprf.data.error.DataErrorInternal
 import com.taxapprf.data.error.DataErrorUser
-import com.taxapprf.data.error.DataErrorUserEmailAlreadyUse
-import com.taxapprf.data.error.DataErrorUserWrongPassword
+import com.taxapprf.data.error.internal.currency.converter.DataErrorInternalCurrencyConverterCalculate
+import com.taxapprf.data.error.internal.currency.converter.DataErrorInternalCurrencyLoad
+import com.taxapprf.data.error.user.DataErrorUserEmailAlreadyUse
+import com.taxapprf.data.error.user.DataErrorUserWrongPassword
 import com.taxapprf.domain.main.account.AccountModel
 import com.taxapprf.domain.main.user.UserWithAccountsModel
 import com.taxapprf.taxapp.R
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
     }
     val toolbar by lazy { MainToolbar(binding.appBarMain.toolbar) }
     val fab by lazy { binding.appBarMain.fab }
+    val retryButton by lazy { binding.appBarMain.content.loadingRetry }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +86,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
 
     override fun onStart() {
         super.onStart()
+        viewModel.defaultUserName = getString(R.string.default_user_name)
         viewModel.defaultAccountName = getString(R.string.default_account_name)
         viewModel.updateUserWithAccounts()
     }
@@ -117,20 +121,31 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         binding.appBarMain.content.loading.isVisible = false
     }
 
-    fun onLoadingError(t: Throwable) {
+    fun onLoadingErrorShowInSnackBar(t: Throwable) {
         onLoadingStop()
+        getErrorMessage(t).showErrorInShackBar()
+    }
+
+    private fun getErrorMessage(t: Throwable) =
         when (t) {
-            is SocketTimeoutException -> R.string.data_error_socket_timeout.showErrorInShackBar()
-            is DataErrorUser -> R.string.auth_error.showErrorInShackBar()
-            is DataErrorInternal -> R.string.data_error_internal.showErrorInShackBar()
-            is DataErrorExternal -> R.string.data_external_error.showErrorInShackBar()
-            is DataErrorExcel -> R.string.data_error_excel.showErrorInShackBar()
-            is DataErrorCBR -> R.string.data_error_cbr.showErrorInShackBar()
-            is DataErrorConnection -> R.string.data_error_connection.showErrorInShackBar()
-            is DataErrorUserWrongPassword -> R.string.error_sign_in.showErrorInShackBar()
-            is DataErrorUserEmailAlreadyUse -> R.string.sign_up_error_email_already_use.showErrorInShackBar()
-            else -> throw t//R.string.data_error.showErrorInShackBar()
+            is DataErrorConnection -> R.string.data_error_connection
+            is SocketTimeoutException -> R.string.data_error_connection
+            is DataErrorUserWrongPassword -> R.string.sign_error_auth
+            is DataErrorUserEmailAlreadyUse -> R.string.sign_error_email_already_use
+            is DataErrorUser -> R.string.data_auth_error
+            is DataErrorInternalCurrencyLoad -> R.string.currency_error_load
+            is DataErrorInternalCurrencyConverterCalculate -> R.string.currency_error_converter_calculate
+            is DataErrorInternal -> R.string.data_internal_error
+            is DataErrorExternal -> R.string.data_external_error
+            is DataErrorExcel -> R.string.data_excel_error
+            is DataErrorCBR -> R.string.data_cbr_error
+            else -> throw t// TODO комментарий для вывода крашей, после вернуть R.string.data_error.showErrorInShackBar()
         }
+
+    fun onLoadingErrorShowInUIWithRetry(t: Throwable) {
+        onLoadingStop()
+        binding.appBarMain.content.loadingErrorMessage.setText(getErrorMessage(t))
+        binding.appBarMain.content.loadingErrorGroup.isVisible = true
     }
 
     private fun Int.showErrorInShackBar() {
@@ -159,7 +174,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
                 viewModel.userWithAccounts.collectLatest { userWithAccounts ->
                     drawer.update(
                         userWithAccountsModel = userWithAccounts,
-                        defaultUserName = getString(R.string.default_account_name)
+                        defaultUserName = viewModel.defaultUserName
                     )
                     onAccountLoaded(userWithAccounts)
                 }
@@ -169,16 +184,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
 
     private fun NavController.observeCurrentBackStack() {
         lifecycle.coroutineScope.launch {
-            currentBackStack.collectLatest {
-                fabVisibilityManager()
+            currentBackStack.collectLatest { navBackStackEntries ->
+                binding.appBarMain.fab
+                    .animate()
+                    .translationY(0f)
+
+                if (fabVisibleDestinations.contains(navBackStackEntries.last().destination.id))
+                    binding.appBarMain.fab.show()
+                else
+                    binding.appBarMain.fab.hide()
             }
         }
-    }
-
-    private fun fabVisibilityManager() {
-        val currentDestination = navController.currentBackStack.value.last().destination.id
-        if (fabVisibleDestinations.contains(currentDestination)) binding.appBarMain.fab.show()
-        else binding.appBarMain.fab.hide()
     }
 
     private val drawerCallback =

@@ -44,7 +44,7 @@
             android:id="@+id/loading_retry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/retry_name"
+            android:text="@string/retry"
             app:icon="@drawable/ic_baseline_refresh_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

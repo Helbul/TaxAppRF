@@ -17,12 +17,10 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.taxapprf.domain.transactions.ReportModel
 import com.taxapprf.domain.transactions.TransactionModel
-import com.taxapprf.domain.transactions.TransactionTypes
 import com.taxapprf.taxapp.R
 import com.taxapprf.taxapp.databinding.FragmentTransactionsBinding
 import com.taxapprf.taxapp.ui.BaseActionModeCallback
 import com.taxapprf.taxapp.ui.BaseFragment
-import com.taxapprf.taxapp.ui.checkStoragePermission
 import com.taxapprf.taxapp.ui.toAppDouble
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -74,12 +72,12 @@ class TransactionsFragment : BaseFragment(R.layout.fragment_transactions) {
         toolbar.updateMenu(R.menu.toolbar_transactions) { menuItem ->
             when (menuItem.itemId) {
                 R.id.toolbar_share_excel -> {
-                    shareExcel()
+                    viewModel.shareReport()
                     true
                 }
 
                 R.id.toolbar_export_excel -> {
-                    exportExcel()
+                    viewModel.exportReport()
                     true
                 }
 
@@ -137,39 +135,18 @@ class TransactionsFragment : BaseFragment(R.layout.fragment_transactions) {
         toolbar.updateTitles(title, subtitle)
     }
 
-    private val transactionTypes
-        get() = mapOf(
-            TransactionTypes.TRADE.k to getString(R.string.transaction_type_trade),
-            TransactionTypes.FUNDING_WITHDRAWAL.k to getString(R.string.transaction_type_funding_withdrawal),
-            TransactionTypes.COMMISSION.k to getString(R.string.transaction_type_commission),
-        )
-
-    private fun shareExcel() {
-        if (requireActivity().checkStoragePermission()) {
-            viewModel.shareReport(transactionTypes)
-        }
-    }
-
-    private fun exportExcel() {
-        if (requireActivity().checkStoragePermission()) {
-            viewModel.exportReport(transactionTypes)
-        }
-    }
-
     private val importExcelIntent =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
 
         }
 
     private fun launchImportExcelIntent(uri: Uri) {
-        if (fragment.requireActivity().checkStoragePermission()) {
-            val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.action = Intent.ACTION_VIEW
-            intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-            intent.type = "application/vnd.ms-excel"
-            intent.setDataAndType(uri, "application/vnd.ms-excel")
-            importExcelIntent.launch(intent)
-        }
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.action = Intent.ACTION_VIEW
+        intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+        intent.type = "application/vnd.ms-excel"
+        intent.setDataAndType(uri, "application/vnd.ms-excel")
+        importExcelIntent.launch(intent)
     }
 
     private fun onShowMoreClick(transactionModel: TransactionModel) {

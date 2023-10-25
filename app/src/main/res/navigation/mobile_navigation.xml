@@ -134,7 +134,6 @@
     <dialog
         android:id="@+id/transaction_detail"
         android:name="com.taxapprf.taxapp.ui.transactions.detail.TransactionDetailFragment"
-        android:label="@string/menuTransactionDetail"
         tools:layout="@layout/fragment_transaction_detail">
         <argument
             android:name="account_id"

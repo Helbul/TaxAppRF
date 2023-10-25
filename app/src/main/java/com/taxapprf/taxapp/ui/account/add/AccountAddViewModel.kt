@@ -10,7 +10,7 @@ class AccountAddViewModel @Inject constructor() : BaseViewModel() {
     var accountName = ""
 
     fun checkName(): Int? {
-        return if (accountName.isErrorNameRange()) R.string.error_input_account_incorrect
+        return if (accountName.isErrorNameRange()) R.string.account_error_input_incorrect
         else null
     }
 

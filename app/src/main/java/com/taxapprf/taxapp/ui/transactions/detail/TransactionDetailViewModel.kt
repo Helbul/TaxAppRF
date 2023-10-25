@@ -5,6 +5,7 @@ import com.taxapprf.data.getEpochDate
 import com.taxapprf.data.local.room.LocalDatabase.Companion.ACCOUNT_ID
 import com.taxapprf.data.local.room.LocalDatabase.Companion.REPORT_ID
 import com.taxapprf.data.local.room.LocalDatabase.Companion.TRANSACTION_ID
+import com.taxapprf.data.toLocalDate
 import com.taxapprf.domain.currency.Currencies
 import com.taxapprf.domain.main.transaction.SaveTransactionModel
 import com.taxapprf.domain.toAppDate
@@ -13,7 +14,6 @@ import com.taxapprf.domain.transactions.detail.GetTransactionDetailModel
 import com.taxapprf.domain.transactions.detail.GetTransactionDetailUseCase
 import com.taxapprf.taxapp.R
 import com.taxapprf.taxapp.ui.BaseViewModel
-import com.taxapprf.taxapp.ui.toLocalDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow

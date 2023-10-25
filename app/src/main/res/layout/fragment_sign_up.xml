@@ -9,12 +9,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/tablet">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/text_sign_up_logo"
-            style="@style/StyleLogoText"
+            style="@style/Theme.TaxApp.Logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +36,7 @@
                 android:id="@+id/edit_sign_up_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/edit_sign_up_name"
+                android:hint="@string/sign_up_name"
                 android:inputType="textPersonName" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -55,7 +54,7 @@
                 android:id="@+id/edit_sign_up_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/edit_sign_up_tel"
+                android:hint="@string/sign_up_phone"
                 android:inputType="phone" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -75,7 +74,7 @@
                 android:id="@+id/edit_sign_up_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/edit_sign_up_email"
+                android:hint="@string/sign_email"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -93,7 +92,7 @@
                 android:id="@+id/edit_sign_up_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/edit_sign_up_password"
+                android:hint="@string/sign_password"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -103,24 +102,10 @@
             android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/offset_24"
-            android:layout_marginBottom="@dimen/offset_24"
-            android:text="@string/button_sign_up_ok"
-            app:layout_constraintBottom_toTopOf="@+id/text_sign_up_under_bottom"
+            android:text="@string/sign_ok"
             app:layout_constraintEnd_toEndOf="@+id/text_layout_sign_up_email"
             app:layout_constraintStart_toStartOf="@+id/text_layout_sign_up_email"
             app:layout_constraintTop_toBottomOf="@+id/text_layout_sign_up_password" />
-
-        <TextView
-            android:id="@+id/text_sign_up_under_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/offset_24"
-            android:gravity="center"
-            android:text="@string/text_sign_up_under_button"
-            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -22,7 +22,7 @@
         android:layout_width="@dimen/zero"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/drawer_header_add_title_horizontal_offset"
-        android:text="@string/drawer_header_add_name"
+        android:text="@string/drawer_header_add"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
         app:layout_constraintBottom_toBottomOf="@+id/drawer_header_item_icon"
         app:layout_constraintEnd_toEndOf="parent"

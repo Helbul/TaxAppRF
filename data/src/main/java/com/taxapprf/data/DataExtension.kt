@@ -8,12 +8,16 @@ import com.google.firebase.database.DatabaseException
 import com.taxapprf.data.error.DataErrorConnection
 import com.taxapprf.data.error.DataErrorExternal
 import com.taxapprf.data.error.DataErrorUser
-import com.taxapprf.data.error.DataErrorUserEmailAlreadyUse
-import com.taxapprf.data.error.DataErrorUserWrongPassword
+import com.taxapprf.data.error.user.DataErrorUserEmailAlreadyUse
+import com.taxapprf.data.error.user.DataErrorUserWrongPassword
+import com.taxapprf.domain.PATTERN_DATE
 import java.net.SocketTimeoutException
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.time.format.ResolverStyle
+import java.util.Locale
 
 
 inline fun <T> safeCall(call: () -> T): T {
@@ -35,3 +39,16 @@ inline fun <T> safeCall(call: () -> T): T {
 fun getEpochDate() = LocalDate.now().toEpochDay()
 fun getEpochTime() = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)
 fun Long.getYear() = LocalDate.ofEpochDay(this).year.toString()
+
+fun String.toLocalDate() =
+    try {
+        LocalDate.parse(
+            this,
+            DateTimeFormatter
+                .ofPattern(PATTERN_DATE)
+                .withLocale(Locale.ROOT)
+                .withResolverStyle(ResolverStyle.STRICT)
+        )
+    } catch (e: Exception) {
+        null
+    }

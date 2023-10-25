@@ -18,8 +18,10 @@ import com.taxapprf.data.local.room.entity.LocalTransactionEntity
 import com.taxapprf.data.local.room.entity.LocalTransactionEntity.Companion.DATE
 import com.taxapprf.data.local.room.entity.LocalTransactionEntity.Companion.NAME
 import com.taxapprf.data.local.room.entity.LocalTransactionEntity.Companion.SUM
+import com.taxapprf.data.local.room.entity.LocalTransactionEntity.Companion.SUM_RUB
 import com.taxapprf.data.local.room.entity.LocalTransactionEntity.Companion.TAX_RUB
 import com.taxapprf.data.local.room.entity.LocalUserEntity
+import com.taxapprf.data.local.room.model.sync.EmptyReportKeysDataModel
 import com.taxapprf.data.local.room.model.sync.SyncResultAccountDataModel
 import com.taxapprf.data.local.room.model.sync.SyncResultReportDataModel
 import com.taxapprf.data.local.room.model.sync.SyncTransactionDataModel
@@ -41,6 +43,15 @@ interface LocalSyncDao {
 
     @Query("DELETE FROM deleted")
     fun deleteAllDeleted()
+
+    @Query("SELECT " +
+            "r.id $ID, " +
+            "r.remote_key $REPORT_KEY, " +
+            "a.remote_key $ACCOUNT_KEY " +
+            "FROM report r " +
+            "LEFT JOIN account a ON a.id = r.account_id " +
+            "WHERE r.size = 0")
+    fun getEmptyReportKeysDataModels(): List<EmptyReportKeysDataModel>
 
     /* ACCOUNT SYNC */
     @Query("SELECT * FROM account WHERE user_id = :userId")
@@ -92,6 +103,7 @@ interface LocalSyncDao {
                 "t.currency_ordinal $CURRENCY_ORDINAL, " +
                 "r.currency_rate $CURRENCY_RATE, " +
                 "t.sum $SUM, " +
+                "t.sum_rub $SUM_RUB, " +
                 "t.tax_rub $TAX_RUB, " +
                 "t.remote_key $REMOTE_KEY, " +
                 "t.is_sync $IS_SYNC, " +
@@ -111,11 +123,10 @@ interface LocalSyncDao {
     @Query(
         "UPDATE report " +
                 "SET " +
-                "size = (SELECT COUNT(*) FROM `transaction` WHERE report_id = :reportId), " +
-                "tax_rub = (SELECT SUM(tax_rub) FROM `transaction` WHERE report_id = :reportId) " +
+                "size = (SELECT COUNT(*) FROM `transaction` WHERE report_id = :reportId) " +
                 "WHERE id = :reportId"
     )
-    fun updateReportTaxAndSumRUB(reportId: Int)
+    fun updateReportSize(reportId: Int)
 
     @Query("DELETE FROM report WHERE size = 0")
     fun deleteAllEmptyReport()
@@ -125,8 +136,9 @@ interface LocalSyncDao {
         reportId: Int,
         localTransactionEntities: List<LocalTransactionEntity>
     ): List<Long> {
+        println(localTransactionEntities)
         val result = saveLocalTransactionEntities(localTransactionEntities)
-        updateReportTaxAndSumRUB(reportId)
+        updateReportSize(reportId)
         return result
     }
 
@@ -137,7 +149,7 @@ interface LocalSyncDao {
     ) =
         if (localTransactionEntities.isNotEmpty()) {
             val result = deleteLocalTransactionEntities(localTransactionEntities)
-            updateReportTaxAndSumRUB(reportId)
+            updateReportSize(reportId)
             deleteAllEmptyReport()
             result
         } else 0

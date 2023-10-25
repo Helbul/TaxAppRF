@@ -1,3 +1,5 @@
-package com.taxapprf.data.error
+package com.taxapprf.data.error.user
 
-class DataErrorUserEmailAlreadyUse : Throwable()
+import com.taxapprf.data.error.DataErrorUser
+
+class DataErrorUserEmailAlreadyUse(message: String? = null) : DataErrorUser(message)

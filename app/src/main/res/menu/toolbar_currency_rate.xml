@@ -4,6 +4,6 @@
     <item
         android:id="@+id/toolbar_calendar"
         android:icon="@drawable/ic_baseline_calendar_month_24"
-        android:title="@string/calendar_name"
+        android:title="@string/calendar"
         app:showAsAction="ifRoom" />
 </menu>

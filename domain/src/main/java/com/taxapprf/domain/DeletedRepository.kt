@@ -1,6 +1,9 @@
 package com.taxapprf.domain
 
+import com.taxapprf.domain.deleted.DeleteReportsModel
+import com.taxapprf.domain.deleted.DeleteTransactionsModel
+
 interface DeletedRepository {
-    suspend fun deleteReports(reportIds: List<Int>)
-    suspend fun deleteTransactions(transactionIds: List<Int>)
+    suspend fun deleteReports(deleteReportsModel: DeleteReportsModel)
+    suspend fun deleteTransactions(deleteTransactionsModel: DeleteTransactionsModel)
 }

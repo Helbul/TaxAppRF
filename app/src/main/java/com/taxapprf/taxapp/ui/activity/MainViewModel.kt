@@ -36,6 +36,7 @@ class MainViewModel @Inject constructor(
     private val updateAllEmptySumRUBAndTaxRUBUseCase: UpdateAllEmptySumRUBAndTaxRUBUseCase,
     private val saveTransactionUseCase: SaveTransactionUseCase,
 ) : ViewModel() {
+    var defaultUserName: String? = null
     var defaultAccountName: String? = null
     var accountId: Int? = null
 

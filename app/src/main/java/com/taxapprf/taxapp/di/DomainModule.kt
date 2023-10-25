@@ -10,6 +10,8 @@ import com.taxapprf.data.TaxRepositoryImpl
 import com.taxapprf.data.TransactionDetailRepositoryImpl
 import com.taxapprf.data.TransactionsRepositoryImpl
 import com.taxapprf.domain.currency.GetCurrencyRateModelsUseCase
+import com.taxapprf.domain.deleted.DeleteReportsUseCase
+import com.taxapprf.domain.deleted.DeleteTransactionsUseCase
 import com.taxapprf.domain.excel.ExportExcelUseCase
 import com.taxapprf.domain.excel.ImportExcelUseCase
 import com.taxapprf.domain.main.account.SwitchAccountUseCase
@@ -18,11 +20,9 @@ import com.taxapprf.domain.main.user.ObserveUserWithAccountsUseCase
 import com.taxapprf.domain.main.user.SignInUseCase
 import com.taxapprf.domain.main.user.SignOutUseCase
 import com.taxapprf.domain.main.user.SignUpUseCase
-import com.taxapprf.domain.reports.DeleteReportsUseCase
 import com.taxapprf.domain.reports.ObserveReportsUseCase
 import com.taxapprf.domain.sync.SyncAllUseCase
 import com.taxapprf.domain.tax.UpdateAllEmptySumRUBAndTaxRUBUseCase
-import com.taxapprf.domain.transactions.DeleteTransactionsUseCase
 import com.taxapprf.domain.transactions.ObserveReportUseCase
 import com.taxapprf.domain.transactions.ObserveTransactionsUseCase
 import com.taxapprf.domain.transactions.detail.GetTransactionDetailUseCase
@@ -68,8 +68,10 @@ object DomainModule {
 
     /* Sync repository */
     @Provides
-    fun provideSyncAllUseCase(syncRepositoryImpl: SyncRepositoryImpl) =
-        SyncAllUseCase(syncRepositoryImpl)
+    fun provideSyncAllUseCase(
+        syncRepositoryImpl: SyncRepositoryImpl,
+        updateAllEmptySumRUBAndTaxRUBUseCase: UpdateAllEmptySumRUBAndTaxRUBUseCase) =
+        SyncAllUseCase(syncRepositoryImpl, updateAllEmptySumRUBAndTaxRUBUseCase)
 
 
     /* Currency repository */

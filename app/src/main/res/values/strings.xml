@@ -1,139 +1,72 @@
 <resources>
     <string name="app_name">TaxApp</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="drawer_header_user_avatar_content_description">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Drawer-->
+    <string name="menu_currency_rates">Курсы сегодня</string>
+    <string name="menu_currency_converter">Конвертер валют</string>
+    <string name="menu_reports">Налоги</string>
+    <string name="menu_sign">Вход</string>
+    <string name="menu_sign_out">Выход</string>
 
-    <string name="error_not_found">Не найдено</string>
-    <string name="sign_up_error_email_already_use">The email address is already in use by another account.</string>
-    <string name="auth_error_session_expire">Сессия истекла</string>
-    <string name="auth_error">Ошибка авторизации</string>
-    <string name="default_user_name_name">Локальная запись</string>
-    <string name="default_account_name">Основной аккаунт</string>
-    <string name="response_error_data_is_empty"></string>
+    <string name="drawer_header_add">Добавить аккаунт</string>
 
+    <string name="drawer_header_user_account_expand_content_description">Раскрыть меню</string>
+    <string name="drawer_header_user_avatar_content_description">Аватар</string>
 
-    <string name="data_error_connection">Проверьте соединение с интернетом и попробуйте еще раз</string>
+    <!--Sign-->
+    <string name="sign_in">Войти</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="sign_ok">Войти</string>
 
+    <string name="sign_email">Email</string>
+    <string name="sign_password">Пароль</string>
 
-    <string-array name="symbols">
-        <item name="rub">@string/symbol_rub</item>
-    </string-array>
+    <string name="sign_up_name">Имя</string>
+    <string name="sign_up_phone">Телефон</string>
 
-    <string name="symbol_rub">₽</string>
+    <string name="sign_error_auth">Неверные параметры входа. Повторите попытку.</string>
+    <string name="sign_error_email_empty">Введите email</string>
+    <string name="sign_error_email_incorrect">Некорректный email</string>
+    <string name="sign_error_name_range">Введите имя (от 3 до 16 символов)</string>
+    <string name="sign_error_phone_empty">Введите телефон</string>
+    <string name="sign_error_password_length">Введите пароль (от 8 до 16 символов)</string>
+    <string name="sign_error_email_already_use">Введенный email занят</string>
 
-    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-
-    <!--Menu-->
-    <string name="menu_home">Home</string>
-    <string name="menuExit">Выйти</string>
-    <string name="menuChangeAccount">Другой счёт</string>
-    <string name="menu_rates_today_name">Курсы сегодня</string>
-    <string name="menu_converter_name">Конвертер валют</string>
-    <string name="menuNewTransaction">Новая сделка</string>
-    <string name="menuTransactionDetail">Редактирование сделки</string>
-    <string name="menuTransactions">Годовой отчет</string>
-    <string name="taxes_name">Налоги</string>
-
-
-    <!--LoginFragment-->
-    <string name="button_sign_in">Войти</string>
-    <string name="button_sign_up">Зарегистрироваться</string>
-    <string name="text_sign_under_bottom">Войдите в свою учетную запись</string>
-
-    <!--SignInFragment-->
-    <string name="edit_sign_in_email">E-mail</string>
-    <string name="edit_sign_in_password">Пароль</string>
-    <string name="button_sign_in_ok">Войти</string>
-    <string name="button_sign_in_cancel">Отменить</string>
-    <string name="text_sign_in_under_bottom">Войдите в свою учетную запись</string>
-    <string name="authSuccess">Пользователь авторизован</string>
-    <string name="authFailure">Ошибка авторизации. %s</string>
-    <string name="error_sign_in">Неверные параметры входа! Повторите попытку.</string>
-
-    <!--SelectAccountFragment-->
-    <string name="buttonSelectOpen">Открыть</string>
-    <string name="buttonSelectCreate">Создать</string>
-    <string name="buttonSelectExit">Выйти</string>
-    <string name="textSelectUnderBottom">Выберете существующий или создайте новый счет</string>
-    <string name="account_select_accounts_loading">Идет загрузка доступных счетов. Пожалуйста, подождите.</string>
-
-    <!--AccountAddFragment-->
+    <!--Account -->
     <string name="account_add_name_hint">Имя счета</string>
-
-    <!--CurrencyRateFragment-->
-    <string name="currency_rate_toolbar">Курс %s</string>
-
-    <!--ConverterFragment-->
-    <string name="currency">Валюта</string>
-
-    <!--Registration Fragment-->
-    <string name="edit_sign_up_name">Имя</string>
-    <string name="edit_sign_up_tel">Телефон</string>
-    <string name="edit_sign_up_email">E-mail</string>
-    <string name="edit_sign_up_password">Пароль</string>
-    <string name="button_sign_up_ok">Подтвердить</string>
-    <string name="button_sign_up_cancel">Отменить</string>
-    <string name="text_sign_up_under_button">Заполните все поля</string>
-    <string name="error_email_empty">Введите ваш email</string>
-    <string name="error_email_incorrect">Некорректный email</string>
-    <string name="error_name_range">Введите ваше имя (от 3 до 16 символов)</string>
-    <string name="error_phone_empty">Введите ваш телефон</string>
-    <string name="error_password_length">Введите пароль (от 8 до 16 символов)</string>
-    <string name="message__sign_up_success">"Пользователь добавлен!"</string>
-
-    <!--FirstAccountFragment-->
-    <string name="edit_first_account">№ счета</string>
-    <string name="button_first_account_ok">Создать</string>
-    <string name="button_first_account_cancel">Пропустить</string>
-    <string name="text_first_account_under_bottom">Введите имя счета</string>
-    <string name="error_input_account_incorrect">Введите имя счета (от 3 до 16 символов)</string>
-
-    <!-- TaxesFragment-->
-    <string name="textTaxesYear">Отчетный год</string>
-    <string name="textTaxesTax">Сумма налога</string>
-    <string name="buttonTaxesAddTransaction">Добавить сделку</string>
-    <string name="buttonTaxesLoadingStatement">Загрузить отчет</string>
-    <string name="taxes_error_parse_report_from_excel">Не удалось конвертипровать файл</string>
+    <string name="account_error_input_incorrect">Введите имя счета (от 3 до 16 символов)</string>
 
 
-    <!-- TransactionsFragment-->
+    <!--Currency -->
+    <string name="currency_rate_toolbar">Курс на %s</string>
+
+    <string name="currency_converter_currency_hint">Валюта</string>
+
+    <string name="currency_error_converter_calculate">Ошибка при расчете суммы</string>
+    <string name="currency_error_load">Ошибка загрузки курса валют</string>
+
+
+    <!-- Transactions-->
     <string name="transactions_title">%s год</string>
     <string name="transactions_subtitle">налог %s ₽</string>
     <string name="transactions_adapter_item_tax_title">налог</string>
     <string name="transactions_rate_not_found">нет записи на ЦБ РФ</string>
     <string name="transactions_rate_not_loaded">ожидание подключения</string>
 
-    <!-- TransactionsDeleteDialogFragment -->
-    <string name="delete_dialog_title">Подтвердить операцию</string>
+
+    <!-- Transactions Delete -->
+    <string name="delete_dialog_title">Подтвердите операцию</string>
     <string name="delete_dialog_message">Вы уверены, что хотите безвозвратно удалить?</string>
     <string name="delete_dialog_ok">Да</string>
     <string name="delete_dialog_cancel">Отмена</string>
 
-    <!-- NewTransactionFragment-->
-    <string name="editNewTransId">Наименование операции</string>
-    <string name="editNewTransDate">Дата сделки ДД/ММ/ГГГГ</string>
-    <string name="editNewTransSum">Сумма</string>
-    <string name="buttonNewTransAdd">Добавить</string>
-    <string name="buttonNewTransCancel">Отменить</string>
 
+    <!-- Transaction Detail-->
+    <string name="transaction_detail_name">Наименование операции</string>
+    <string name="transaction_detail_type">Тип транзакции</string>
+    <string name="transaction_detail_date">Дата сделки ДД/ММ/ГГГГ</string>
+    <string name="transaction_detail_sum">Сумма</string>
 
-    <!-- TransactionDetailFragment-->
-
-    <string name="edit_detail_id">Наименование операции</string>
-    <string name="edit_detail_type">Тип транзакции</string>
-    <string name="edit_detail_date">Дата сделки ДД/ММ/ГГГГ</string>
-    <string name="edit_detail_sum">Сумма</string>
-    <string name="transaction_detail_delete_success">Сделка удалена</string>
-    <string name="transaction_detail_save_success">Сделка обновлена</string>
-    <string name="transaction_detail_add_error_load_rate">Не удалось загрузить курс валюты. Сделка не добавлена!</string>
-    <string name="transaction_detail_save_fail">Не удалось обновить сделку</string>
     <string name="transaction_detail_error_name_too_long">Название слишком большое</string>
     <string name="transaction_detail_error_sum_empty">Укажите сумму</string>
     <string name="transaction_detail_error_sum_too_long">Сумма слишком большая</string>
@@ -141,36 +74,31 @@
     <string name="transaction_detail_error_date_range">Допустимы диапазон от 1992 года до сегодня</string>
 
 
-    <!--ChangeAccountFragment-->
-    <string name="buttonChangeAccountOpen">Открыть</string>
-    <string name="buttonChangeAccountCreate">Создать</string>
-    <string name="editChangeAccountName">Id нового счета</string>
-    <string name="textChangeAccountUnderBottom">Выберете существующий или создайте новый счет</string>
-    <string name="account_change_message_waite_loading">Идет загрузка доступных счетов. Пожалуйста, подождите.</string>
-    <string name="drawer_header_add_name">Добавить аккаунт</string>
-    <string name="add_name">Добавить</string>
-    <string name="retry_name">Повторить</string>
-    <string name="share_excel_name">Отправить</string>
-    <string name="import_excel_name">Импорт</string>
-    <string name="export_excel_name">Экспорт</string>
-    <string name="save_name">Сохранить</string>
-    <string name="delete_name">Удалить</string>
-    <string name="data_error_internal">Внутренняя ошибка</string>
-    <string name="data_external_error">внешняя ошибка</string>
-    <string name="data_error">Ошибка</string>
-    <string name="data_error_excel">ошибка экселя</string>
-    <string name="data_error_cbr">Курс ЦБ РФ не найден</string>
-    <string name="data_error_socket_timeout">Превышено время ожидания. Повторите попытку.</string>
-    <string name="currency_converter_sum_rub">RUB</string>
-    <string name="currency_converter_sum_hint">0.00</string>
-    <string name="currency_converter_sum_default">1</string>
-    <string name="sign_title_name">Вход</string>
-    <string name="sign_out_name">Выход</string>
-    <string name="drawer_header_user_account_expand_content_description">expand</string>
+    <!--Shared-->
+    <string name="import_excel">Импорт</string>
+    <string name="export_excel">Экспорт</string>
+    <string name="share_excel">Отправить</string>
 
-    <!-- share -->
+    <string name="add">Добавить</string>
+    <string name="save">Сохранить</string>
+    <string name="delete">Удалить</string>
+    <string name="retry">Повторить</string>
+
+    <string name="calendar">Календарь</string>
+
+    <string name="symbol_rub">₽</string>
+
+    <string name="data_internal_error">Внутренняя ошибка</string>
+    <string name="data_external_error">Внешняя ошибка</string>
+    <string name="data_excel_error">Ошибка импорта\экспорта</string>
+    <string name="data_cbr_error">Курс ЦБ РФ не найден</string>
+    <string name="data_error_connection">Проверьте соединение с интернетом и попробуйте еще раз</string>
+    <string name="data_auth_error">Ошибка авторизации</string>
+
     <string name="share_message_name">Расчёт налога от TaxApp</string>
     <string name="share_message_description">Отправка…</string>
-    <string name="calendar_name">Календарь</string>
+
+    <string name="default_user_name">Локальная запись</string>
+    <string name="default_account_name">Основной аккаунт</string>
 
 </resources>

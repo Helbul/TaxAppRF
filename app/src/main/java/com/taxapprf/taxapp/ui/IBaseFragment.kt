@@ -26,6 +26,8 @@ interface IBaseFragment {
     fun BaseViewModel.attach() {
         baseViewModel = this
 
+        mainActivity.retryButton.setOnClickListener { onLoadingRetry() }
+
         observeState()
 
         fragment.lifecycle.addObserver(object : LifecycleEventObserver {
@@ -64,7 +66,7 @@ interface IBaseFragment {
     }
 
     fun onError(t: Throwable) {
-        mainActivity.onLoadingError(t)
+        mainActivity.onLoadingErrorShowInSnackBar(t)
     }
 
     fun onSuccess() {

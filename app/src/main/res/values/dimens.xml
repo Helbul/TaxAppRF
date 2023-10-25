@@ -1,4 +1,8 @@
 <resources>
+    <dimen name="logo_margin_top">32dp</dimen>
+    <dimen name="logo_text_size">46sp</dimen>
+
+
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
@@ -8,8 +12,6 @@
 
     <!-- SignIn, SignUp-->
     <dimen name="sign_in_button_margin_side">50dp</dimen>
-    <dimen name="logo_margin_top">30dp</dimen>
-    <dimen name="logo_size">45sp</dimen>
     <dimen name="sign_margin_vertical">20dp</dimen>
     <dimen name="sign_in_text_under_bottom_size">16sp</dimen>
 
@@ -43,6 +45,9 @@
     <dimen name="default_card_top_offset">12dp</dimen>
     <dimen name="default_card_corner_radius">12dp</dimen>
     <dimen name="offset_2">2dp</dimen>
+    <dimen name="currency_converter_input_layout_horizontal_offset">80dp</dimen>
+    <dimen name="currency_converter_button_convert_size">80dp</dimen>
+    <dimen name="image_circle_stroke_width">1dp</dimen>
 
     <!-- На удаление -->
 

@@ -16,26 +16,4 @@ interface LocalCurrencyDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveRates(localCBRRateEntities: List<LocalCurrencyRateEntity>): List<Long>
-
-/*    *//* updateNotLoadedCurrencies *//*
-    @Query("SELECT * FROM `transaction` WHERE tax IS NULL")
-    fun getNotLoadedLocalTransactionEntities(): List<LocalTransactionEntity>
-
-    @Query("SELECT * FROM report WHERE id = :reportId LIMIT 1")
-    fun getLocalReportEntity(reportId: Int): LocalReportEntity?
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveLocalReportEntities(localReportEntities: List<LocalReportEntity>): List<Long>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveLocalTransactionEntities(localTransactionEntities: List<LocalTransactionEntity>): List<Long>
-
-    @Transaction
-    fun saveUpdatedEntities(
-        localReportEntities: List<LocalReportEntity>,
-        localTransactionEntities: List<LocalTransactionEntity>
-    ) {
-        saveLocalReportEntities(localReportEntities)
-        saveLocalTransactionEntities(localTransactionEntities)
-    }*/
 }

@@ -1,8 +1,7 @@
 package com.taxapprf.domain.excel
 
 data class ExportExcelModel(
-    val reportId: Int,
-    val transactionTypes: Map<Int, String>
+    val reportId: Int
 ) {
     var reportName: String? = null
     var reportTax: Double? = null

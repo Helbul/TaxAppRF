@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TaxApp</string>
+
+    <!--Drawer-->
+    <string name="menu_currency_rates">Курсы сегодня</string>
+    <string name="menu_currency_converter">Конвертер валют</string>
+    <string name="menu_reports">Налоги</string>
+    <string name="menu_sign">Вход</string>
+    <string name="menu_sign_out">Выход</string>
+
+    <string name="drawer_header_add">Добавить аккаунт</string>
+
+    <string name="drawer_header_user_account_expand_content_description">Раскрыть меню</string>
+    <string name="drawer_header_user_avatar_content_description">Аватар</string>
+
+    <!--Sign-->
+    <string name="sign_in">Войти</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="sign_ok">Войти</string>
+
+    <string name="sign_email">Email</string>
+    <string name="sign_password">Пароль</string>
+
+    <string name="sign_up_name">Имя</string>
+    <string name="sign_up_phone">Телефон</string>
+
+    <string name="sign_error_auth">Неверные параметры входа. Повторите попытку.</string>
+    <string name="sign_error_email_empty">Введите email</string>
+    <string name="sign_error_email_incorrect">Некорректный email</string>
+    <string name="sign_error_name_range">Введите имя (от 3 до 16 символов)</string>
+    <string name="sign_error_phone_empty">Введите телефон</string>
+    <string name="sign_error_password_length">Введите пароль (от 8 до 16 символов)</string>
+    <string name="sign_error_email_already_use">The email address is already in use by another account.</string>
+
+    <!--Account -->
+    <string name="account_add_name_hint">Имя счета</string>
+    <string name="account_error_input_incorrect">Введите имя счета (от 3 до 16 символов)</string>
+
+
+    <!--Currency -->
+    <string name="currency_rate_toolbar">Курс на %s</string>
+
+    <string name="currency_converter_currency_hint">Валюта</string>
+
+    <string name="currency_error_converter_calculate">Ошибка при расчете суммы</string>
+    <string name="currency_error_load">Ошибка загрузки курса валют</string>
+
+
+    <!-- Transactions-->
+    <string name="transactions_title">%s год</string>
+    <string name="transactions_subtitle">налог %s ₽</string>
+    <string name="transactions_adapter_item_tax_title">налог</string>
+    <string name="transactions_rate_not_found">нет записи на ЦБ РФ</string>
+    <string name="transactions_rate_not_loaded">ожидание подключения</string>
+
+
+    <!-- Transactions Delete -->
+    <string name="delete_dialog_title">Подтвердите операцию</string>
+    <string name="delete_dialog_message">Вы уверены, что хотите безвозвратно удалить?</string>
+    <string name="delete_dialog_ok">Да</string>
+    <string name="delete_dialog_cancel">Отмена</string>
+
+
+    <!-- Transaction Detail-->
+    <string name="transaction_detail_name">Наименование операции</string>
+    <string name="transaction_detail_type">Тип транзакции</string>
+    <string name="transaction_detail_date">Дата сделки ДД/ММ/ГГГГ</string>
+    <string name="transaction_detail_sum">Сумма</string>
+
+    <string name="transaction_detail_error_name_too_long">Название слишком большое</string>
+    <string name="transaction_detail_error_sum_empty">Укажите сумму</string>
+    <string name="transaction_detail_error_sum_too_long">Сумма слишком большая</string>
+    <string name="transaction_detail_error_date_format">Введите дату в формате ДД/ММ/ГГГГ</string>
+    <string name="transaction_detail_error_date_range">Допустимы диапазон от 1992 года до сегодня</string>
+
+
+    <!--Shared-->
+    <string name="import_excel">Импорт</string>
+    <string name="export_excel">Экспорт</string>
+    <string name="share_excel">Отправить</string>
+
+    <string name="add">Добавить</string>
+    <string name="save">Сохранить</string>
+    <string name="delete">Удалить</string>
+    <string name="retry">Повторить</string>
+
+    <string name="calendar">Календарь</string>
+
+    <string name="symbol_rub">₽</string>
+
+    <string name="data_internal_error">Внутренняя ошибка</string>
+    <string name="data_external_error">Внешняя ошибка</string>
+    <string name="data_excel_error">Ошибка импорта\экспорта</string>
+    <string name="data_cbr_error">Курс ЦБ РФ не найден</string>
+    <string name="data_error_connection">Проверьте соединение с интернетом и попробуйте еще раз</string>
+    <string name="data_auth_error">Ошибка авторизации</string>
+
+    <string name="share_message_name">Расчёт налога от TaxApp</string>
+    <string name="share_message_description">Отправка…</string>
+
+    <string name="default_user_name">Локальная запись</string>
+    <string name="default_account_name">Основной аккаунт</string>
+</resources>

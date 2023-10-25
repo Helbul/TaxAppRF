@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/offset_16"
         android:layout_marginEnd="@dimen/offset_16"
-        android:text="@string/save_name"
+        android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +45,7 @@
             android:id="@+id/spinner_transaction_detail_type"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/edit_detail_type"
+            android:hint="@string/transaction_detail_type"
             android:inputType="none"
             android:textAlignment="textStart" />
 
@@ -64,7 +64,7 @@
             android:id="@+id/edit_text_transaction_detail_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/edit_detail_id"
+            android:hint="@string/transaction_detail_name"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,7 +82,7 @@
             android:id="@+id/edit_text_transaction_detail_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/edit_detail_date"
+            android:hint="@string/transaction_detail_date"
             android:inputType="date" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,7 +110,7 @@
             android:id="@+id/edit_text_transaction_detail_sum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/edit_detail_sum"
+            android:hint="@string/transaction_detail_sum"
             android:inputType="numberDecimal|numberSigned"
             android:textSize="@dimen/text_size_16sp" />
     </com.google.android.material.textfield.TextInputLayout>

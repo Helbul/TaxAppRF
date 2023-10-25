@@ -11,12 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
-            style="@style/Widget.Material3.Toolbar"
             android:layout_width="match_parent"
-            app:menu="@menu/action_menu_report"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/toolbar_empty" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

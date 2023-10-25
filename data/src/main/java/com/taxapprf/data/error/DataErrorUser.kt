@@ -1,3 +1,3 @@
 package com.taxapprf.data.error
 
-class DataErrorUser : Exception()
+open class DataErrorUser(message: String? = null) : Exception(message)

@@ -1,8 +1,10 @@
 package com.taxapprf.data
 
 import com.taxapprf.data.local.room.LocalSyncDao
+import com.taxapprf.data.remote.firebase.dao.RemoteReportDao
 import com.taxapprf.data.remote.firebase.dao.RemoteTransactionDao
 import com.taxapprf.data.remote.firebase.dao.RemoteUserDao
+import com.taxapprf.data.remote.firebase.entity.FirebaseReportEntity
 import com.taxapprf.data.remote.firebase.entity.FirebaseTransactionEntity
 import com.taxapprf.data.sync.SyncAccounts
 import com.taxapprf.data.sync.SyncReports
@@ -15,6 +17,7 @@ class SyncRepositoryImpl @Inject constructor(
 
     private val networkManager: NetworkManager,
     private val remoteUserDao: RemoteUserDao,
+    private val remoteReportDao: RemoteReportDao,
     private val remoteTransactionDao: RemoteTransactionDao,
 
     private val syncAccounts: SyncAccounts,
@@ -51,7 +54,11 @@ class SyncRepositoryImpl @Inject constructor(
             localSyncDao.getAllDeleted().forEach { localDeletedEntity ->
                 if (localDeletedEntity.accountKey != accountKey || localDeletedEntity.reportKey != reportKey) {
                     if (updateRemoteMap.isNotEmpty()) {
-                        remoteTransactionDao.updateTransactions(accountKey, reportKey, updateRemoteMap)
+                        remoteTransactionDao.updateTransactions(
+                            accountKey,
+                            reportKey,
+                            updateRemoteMap
+                        )
                         updateRemoteMap.clear()
                     }
 
@@ -66,6 +73,12 @@ class SyncRepositoryImpl @Inject constructor(
                 remoteTransactionDao.updateTransactions(accountKey, reportKey, updateRemoteMap)
                 localSyncDao.deleteAllDeleted()
             }
+        }
+
+        localSyncDao.getEmptyReportKeysDataModels().forEach { emptyReportKeysDataModel ->
+            val updateRemoteMap = mutableMapOf<String, FirebaseReportEntity?>()
+            updateRemoteMap[emptyReportKeysDataModel.reportKey] = null
+            remoteReportDao.updateAll(emptyReportKeysDataModel.accountKey, updateRemoteMap)
         }
     }
 }

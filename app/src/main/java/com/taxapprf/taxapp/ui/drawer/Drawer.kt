@@ -1,6 +1,7 @@
 package com.taxapprf.taxapp.ui.drawer
 
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.helper.widget.Layer
@@ -50,6 +51,19 @@ class Drawer(
 
     private val accountsAdapter = MainAccountsAdapter(accountsAdapterCallback)
 
+    private val drawerListener =
+        object : DrawerLayout.DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+
+            override fun onDrawerOpened(drawerView: View) {}
+
+            override fun onDrawerClosed(drawerView: View) {
+                if (accountsRecycler.isVisible) expandAccounts()
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {}
+        }
+
     init {
         accountsRecycler.adapter = accountsAdapter
         activeAccountLayer.setOnClickListener { expandAccounts() }
@@ -57,11 +71,12 @@ class Drawer(
             closeDrawer()
             it.onNavigationItemClick()
         }
+        drawerLayout.addDrawerListener(drawerListener)
     }
 
     fun update(
         userWithAccountsModel: UserWithAccountsModel?,
-        defaultUserName: String
+        defaultUserName: String?
     ) {
         updateUser(
             user = userWithAccountsModel?.user,
@@ -77,7 +92,7 @@ class Drawer(
 
     private fun updateUser(
         user: UserModel?,
-        defaultUserName: String,
+        defaultUserName: String?,
     ) {
         if (user?.email != LOCAL_USER_EMAIL) {
             showWithAuth()
@@ -86,9 +101,9 @@ class Drawer(
             userEmail.text = user?.email
         } else {
             hideWithoutAuth()
-            userAvatar.setImageResource(R.drawable.ic_tax_app_logo)
+            userAvatar.setImageResource(R.mipmap.ic_launcher_round)
             userName.text = defaultUserName
-            userEmail.text = ""
+            userEmail.text = null
         }
     }
 
@@ -115,11 +130,24 @@ class Drawer(
     }
 
     private fun expandAccounts() {
-        accountsRecycler.isVisible = !accountsRecycler.isVisible
-        expandAccounts.setImageResource(
-            if (accountsRecycler.isVisible) R.drawable.ic_baseline_expand_less_24
-            else R.drawable.ic_baseline_expand_more_24
-        )
+        accountsRecycler.apply {
+            if (isVisible) {
+                animate()
+                    .alpha(0f)
+                    .withEndAction {
+                        expandAccounts.setImageResource(R.drawable.ic_baseline_expand_more_24)
+                        isVisible = false
+                    }
+            } else {
+                animate()
+                    .alpha(1f)
+                    .withStartAction {
+                        expandAccounts.setImageResource(R.drawable.ic_baseline_expand_less_24)
+                        alpha = 0f
+                        isVisible = true
+                    }
+            }
+        }
     }
 
     private fun MenuItem.onNavigationItemClick() =
@@ -156,7 +184,8 @@ class Drawer(
             else -> false
         }
 
-    private fun closeDrawer() = drawerLayout.close()
+    private fun closeDrawer() =
+        drawerLayout.close()
 
     companion object {
         private const val HEADER_POSITION = 0

@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginHorizontal="@dimen/offset_16"
+    android:clipToPadding="false"
+    android:paddingBottom="@dimen/offset_16"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:context=".ui.reports.ReportsFragment"
     tools:listitem="@layout/fragment_reports_adapter_item" />

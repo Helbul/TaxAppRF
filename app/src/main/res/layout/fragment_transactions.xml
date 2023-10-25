@@ -5,6 +5,8 @@
     android:id="@+id/recycler_transactions"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:paddingBottom="@dimen/offset_16"
     android:layout_marginHorizontal="@dimen/offset_16"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:context=".ui.transactions.TransactionsFragment"

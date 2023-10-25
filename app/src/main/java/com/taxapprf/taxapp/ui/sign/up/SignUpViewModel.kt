@@ -41,23 +41,23 @@ class SignUpViewModel @Inject constructor(
         }
 
     fun checkEmail(): Int? {
-        return if (email.isEmpty()) R.string.error_email_empty
-        else if (email.isEmailIncorrect()) R.string.error_email_incorrect
+        return if (email.isEmpty()) R.string.sign_error_email_empty
+        else if (email.isEmailIncorrect()) R.string.sign_error_email_incorrect
         else null
     }
 
     fun checkName(): Int? {
-        return if (name.isErrorNameRange()) R.string.error_name_range
+        return if (name.isErrorNameRange()) R.string.sign_error_name_range
         else null
     }
 
     fun checkPhone(): Int? {
-        return if (phone.isEmpty()) R.string.error_phone_empty
+        return if (phone.isEmpty()) R.string.sign_error_phone_empty
         else null
     }
 
     fun checkPassword(): Int? {
-        return if (password.isErrorPasswordRange()) R.string.error_password_length
+        return if (password.isErrorPasswordRange()) R.string.sign_error_password_length
         else null
     }
 

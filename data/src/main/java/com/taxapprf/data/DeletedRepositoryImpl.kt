@@ -2,60 +2,71 @@ package com.taxapprf.data
 
 import com.taxapprf.data.local.room.LocalDeletedDao
 import com.taxapprf.data.local.room.entity.LocalDeletedEntity
+import com.taxapprf.data.local.room.model.transaction.DeletedReportDataModel
 import com.taxapprf.data.local.room.model.transaction.DeletedTransactionDataModel
 import com.taxapprf.domain.DeletedRepository
+import com.taxapprf.domain.deleted.DeleteReportsModel
+import com.taxapprf.domain.deleted.DeleteTransactionsModel
 import javax.inject.Inject
 
 class DeletedRepositoryImpl @Inject constructor(
     private val localDeletedDao: LocalDeletedDao,
 ) : DeletedRepository {
-    override suspend fun deleteReports(reportIds: List<Int>) {
-        reportIds.forEach { reportId ->
-            val deleteTransactions = localDeletedDao.getGetDeletedTransactionsByReportId(reportId)
-            startLocalDeleteTransactions(deleteTransactions)
+    override suspend fun deleteReports(deleteReportsModel: DeleteReportsModel) {
+        deleteReportsModel.reportIds.forEach { reportId ->
+            localDeletedDao.getGetDeletedReport(reportId)?.let { deletedReportDataModel ->
+                val deletedTransactionDataModels =
+                    localDeletedDao.getGetDeletedTransactionsByReportId(reportId)
+                startLocalDeleteTransactions(deletedReportDataModel, deletedTransactionDataModels)
+            }
         }
     }
 
-    override suspend fun deleteTransactions(transactionIds: List<Int>) {
-        val deleteTransactions =
-            localDeletedDao.getGetDeletedTransactionsByTransactionIds(transactionIds)
-        startLocalDeleteTransactions(deleteTransactions)
+    override suspend fun deleteTransactions(deleteTransactionsModel: DeleteTransactionsModel) {
+        localDeletedDao.getGetDeletedReport(deleteTransactionsModel.reportId)
+            ?.let { deletedReportDataModel ->
+                val deletedTransactionDataModels =
+                    localDeletedDao.getGetDeletedTransactionsByTransactionIds(
+                        deleteTransactionsModel.transactionIds
+                    )
+                startLocalDeleteTransactions(deletedReportDataModel, deletedTransactionDataModels)
+            }
     }
 
-    private fun startLocalDeleteTransactions(deleteTransactions: List<DeletedTransactionDataModel>) {
-        if (deleteTransactions.isNotEmpty()) {
-            localDeletedDao.getGetDeletedReport(deleteTransactions.first().reportId)
-                ?.let { getDeletedReport ->
-                    var newTax = getDeletedReport.taxRUB
-                    var newSize = getDeletedReport.size
-                    val localDeletedKeyEntities = mutableListOf<LocalDeletedEntity>()
+    private fun startLocalDeleteTransactions(
+        deletedReportDataModel: DeletedReportDataModel,
+        deletedTransactionDataModels: List<DeletedTransactionDataModel>
+    ) {
+        if (deletedTransactionDataModels.isNotEmpty()) {
+            var newTax = deletedReportDataModel.taxRUB
+            var newSize = deletedReportDataModel.size
+            val localDeletedKeyEntities = mutableListOf<LocalDeletedEntity>()
 
-                    deleteTransactions
-                        .forEach { getDeletedTransaction ->
-                            getDeletedTransaction.taxRUB?.let { newTax -= it }
-                            newSize--
+            deletedTransactionDataModels
+                .forEach { deletedTransactionDataModel ->
+                    deletedTransactionDataModel.taxRUB?.let { newTax -= it }
+                    newSize--
 
-                            getDeletedTransaction.remoteKey?.let {
-                                localDeletedKeyEntities.add(
-                                    LocalDeletedEntity(
-                                        accountKey = getDeletedReport.accountKey,
-                                        reportKey = getDeletedReport.reportKey,
-                                        transactionKey = getDeletedTransaction.remoteKey,
-                                        syncAt = getDeletedTransaction.syncAt
-                                    )
-                                )
-                            }
-                        }
-
-                    if (newSize > 0)
-                        localDeletedDao
-                            .updateLocalReportEntity(getDeletedReport.id, newTax, newSize)
-                    else
-                        localDeletedDao.deleteLocalReportEntity(getDeletedReport.id)
-
-                    localDeletedDao.saveLocalDeletedEntity(localDeletedKeyEntities)
-                    localDeletedDao.deleteLocalTransactionEntities(deleteTransactions.map { it.id })
+                    deletedTransactionDataModel.remoteKey?.let {
+                        localDeletedKeyEntities.add(
+                            LocalDeletedEntity(
+                                accountKey = deletedReportDataModel.accountKey,
+                                reportKey = deletedReportDataModel.reportKey,
+                                transactionKey = deletedTransactionDataModel.remoteKey,
+                                syncAt = deletedTransactionDataModel.syncAt
+                            )
+                        )
+                    }
                 }
+
+            if (newSize > 0)
+                localDeletedDao
+                    .updateLocalReportEntity(deletedReportDataModel.id, newTax, newSize)
+            else
+                localDeletedDao.deleteLocalReportEntity(deletedReportDataModel.id)
+
+            localDeletedDao.saveLocalDeletedEntity(localDeletedKeyEntities)
+            localDeletedDao.deleteLocalTransactionEntities(deletedTransactionDataModels.map { it.id })
         }
     }
 }

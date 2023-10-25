@@ -33,43 +33,6 @@ class CurrencyRepositoryImpl @Inject constructor(
             }
         }.map { it.toCurrencyRateModel() }
 
-/*    override suspend fun updateNotLoadedCurrencies() {
-        if (!networkManager.isConnection) return
-
-        val localReportEntities = mutableListOf<LocalReportEntity>()
-        val localTransactionEntities = mutableListOf<LocalTransactionEntity>()
-
-        localCurrencyDao.getNotLoadedLocalTransactionEntities().forEach { localTransactionEntity ->
-            getCurrencyRate(
-                localTransactionEntity.currencyOrdinal,
-                localTransactionEntity.date
-            )?.let { rate ->
-                localReportEntities.find { it.id == localTransactionEntity.reportId }
-                    ?: localCurrencyDao.getLocalReportEntity(localTransactionEntity.reportId)
-                        ?.let { localReportEntity ->
-                            calculateTax(
-                                localReportEntities,
-                                localTransactionEntity.sum,
-                                rate,
-                                localTransactionEntity.typeOrdinal
-                            )?.let { newTax ->
-                                localReportEntities.add(localReportEntity.copy(tax = localReportEntity.tax + newTax))
-                                localTransactionEntities.add(localTransactionEntity.copy(tax = newTax))
-                            }
-                        }
-            }
-        }
-
-        localCurrencyDao.saveUpdatedEntities(localReportEntities, localTransactionEntities)
-    }
-
-    private fun saveTransaction() {
-        // saveTransaction
-        // updateTax
-        // SyncTransactions
-        // deleteTransaction
-    }*/
-
     private fun tryGetRemote(date: Long, currencyOrdinal: Int? = null) =
         try {
             if (networkManager.isConnection) {
